@@ -1,6 +1,7 @@
 ---
 title: oddhorse website
-subtitle: ongoing since 2021. work in progress
+time: ongoing since 2021
+subtitle: work in progress
 ---
 
 <https://odd.horse>
