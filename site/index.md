@@ -1,3 +1,2 @@
-# john-trinh.com
-
 haiiii
+dd

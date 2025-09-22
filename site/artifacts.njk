@@ -1,0 +1,12 @@
+<h1>artifacts</h1>
+
+<ul>
+    {% for artifact in collections.artifacts %}
+        <li>
+            <a href="{{ artifact.url }}">{{ artifact.data.title }}</a>
+            {% if artifact.data.subtitle %}
+                <span> — {{ artifact.data.subtitle }}</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,5 @@
+{
+	"layout": "artifact.njk",
+	"tags": ["artifacts", "portfolio"],
+	"parent": "artifacts"
+}

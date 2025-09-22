@@ -1,0 +1,11 @@
+---
+layout: base.njk
+---
+
+{% block content %}
+    <h2>{{ title }}</h2>
+    <h3>
+        <i>{{ subtitle }}</i>
+    </h3>
+    {{ content | safe }}
+{% endblock %}

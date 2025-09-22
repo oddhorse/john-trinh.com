@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
     {% include "head.njk" %}
     <body>
+        {% include "header.njk" %}
         <main>
             {{ content | safe }}
         </main>
+        {% include "footer.njk" %}
+
+        {# add-ins #}
+        {#{% include "background.njk" %}#}
     </body>
 </html>
