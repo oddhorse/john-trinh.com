@@ -7,19 +7,16 @@ tags:
   - tech
   - marketing
   - brand
-image: [TODO: Add cover image path]
+image: /assets/images/horse-qr-codes/horse-qr.png
 ---
 
-[TODO: Copy description from https://john-trinh.cargo.site/horse-qr-codes]
+![qr code](/assets/images/horse-qr-codes/horse-qr.png "neighh")
 
-[TODO: Add any project links]
+qr codes for my artist project, <a href="https://odd.horse" target="_blank" rel="noopener">oddhorse</a>. colorful and fully functional. an innovation in qr code form, presentation, and perception. incredibly loud while not saying a word...
 
-neighh
+![more qr codes](/assets/images/horse-qr-codes/four-in-a-grid.png "more designs.")
 
-qr codes for my artist project, oddhorse. colorful and fully functional. an innovation in qr code form, presentation, and perception. incredibly loud while not saying a word...
+![in the wild 1](/assets/images/horse-qr-codes/qr-wild1.jpg)
+![in the wild 2](/assets/images/horse-qr-codes/qr-wild2.jpg "horses in the wild")
 
-more designs.
-
-horses in the wild
-
-poster concepts
+![poster concepts](/assets/images/horse-qr-codes/poster5.png "poster concepts")
