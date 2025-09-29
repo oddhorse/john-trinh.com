@@ -7,5 +7,10 @@ layout: base.njk
     <h3>
         <i>{{ time }}. {{ subtitle }}</i>
     </h3>
+    {#
+    {% if image %}
+        <img src="{{ image }}" alt="{{ title }} image" style="max-width:400px;display:block;">
+    {% endif %}
+    #}
     {{ content | safe }}
 {% endblock %}

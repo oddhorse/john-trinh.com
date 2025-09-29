@@ -3,6 +3,9 @@
 <ul>
     {% for artifact in collections.artifacts %}
         <li>
+            {% if artifact.data.image %}
+                <img src="{{ artifact.data.image }}" alt="{{ artifact.data.title }} image" style="max-width:200px;display:block;">
+            {% endif %}
             <a href="{{ artifact.url }}">{{ artifact.data.title }}</a>
             {% if artifact.data.subtitle %}
                 <span> — {{ artifact.data.subtitle }}</span>
