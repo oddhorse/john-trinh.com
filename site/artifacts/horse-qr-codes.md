@@ -2,7 +2,7 @@
 title: horse qr codes
 subtitle: digital process
 time: nov 2022
-date: 2025-05-10
+date: 2022-11-01
 tags:
   - tech
   - marketing

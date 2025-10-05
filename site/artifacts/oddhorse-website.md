@@ -4,7 +4,12 @@ time: ongoing since 2021
 subtitle: work in progress
 date: 2025-03-01
 image: /assets/images/oddhorse-website/image-1.png
+tags: 
+  - tech
+  - brand
 ---
+
+![pic of oddhorse website](/assets/images/oddhorse-website/image-1.png)
 
 <https://odd.horse>
 (main)
