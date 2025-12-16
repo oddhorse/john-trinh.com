@@ -1,8 +1,7 @@
-# john-trinh.com
+# [john-trinh.com](john-trinh.com)
 
-my personal site :3
+portfolio. artist project at [odd.horse](https://odd.horse)
 
 ## tech stack
 
 - [11ty](https://www.11ty.dev/) static site generator
-- [skeleton](http://getskeleton.com) css boilerplate
