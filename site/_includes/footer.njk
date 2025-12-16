@@ -1,0 +1,16 @@
+<footer>
+    {% if gitInfo.branch == 'beta' %}
+        <p id="beta-notice">beta preview @ <a>https://beta.john-trinh.com</a>. <a href="https://john-trinh.com" target="_blank">click to visit the current version!</a>
+        </p>
+    {% endif %}
+    {% if draft %}
+        <p>this page is unlisted! sneaky sneaky...</p>
+    {% endif %}
+    <p>
+        <i>copyright {{ year }} john trinh •
+            <a href="https://github.com/oddhorse/john-trinh.com/tree/{{ gitInfo.branch }}" target="_blank">github
+             {% include "logos/github.svg" %}
+            </a> - <a href="https://github.com/oddhorse/john-trinh.com/commit/{{ gitInfo.commit }}" target="_blank">{{ gitInfo.shortcommit }}</a>
+        </i>
+    </p>
+</footer>

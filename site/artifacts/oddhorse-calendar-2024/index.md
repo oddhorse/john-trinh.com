@@ -7,40 +7,40 @@ tags:
   - art
   - brand
   - silly + fun
-image: /assets/images/oddhorse-calendar-2024/front-of-calendar.jpg
+image: /artifacts/oddhorse-calendar-2024/front-of-calendar.jpg
 ---
 
-![front of calendar](/assets/images/oddhorse-calendar-2024/front-of-calendar.jpg "front of calendar")
+![front of calendar](/artifacts/oddhorse-calendar-2024/front-of-calendar.jpg "front of calendar")
 
-![back of calendar](/assets/images/oddhorse-calendar-2024/back-of-calendar.jpg "back of calendar")
+![back of calendar](/artifacts/oddhorse-calendar-2024/back-of-calendar.jpg "back of calendar")
 
-![now that's an odd horse!](/assets/images/oddhorse-calendar-2024/now-that-s-an-odd-horse-.jpeg "now that's an odd horse!")
+![now that's an odd horse!](/artifacts/oddhorse-calendar-2024/now-that-s-an-odd-horse-.jpeg "now that's an odd horse!")
 
-![january](/assets/images/oddhorse-calendar-2024/january.jpeg "january")
+![january](/artifacts/oddhorse-calendar-2024/january.jpeg "january")
 
-![february](/assets/images/oddhorse-calendar-2024/february.jpeg "february")
+![february](/artifacts/oddhorse-calendar-2024/february.jpeg "february")
 
-![march](/assets/images/oddhorse-calendar-2024/march.jpeg "march")
+![march](/artifacts/oddhorse-calendar-2024/march.jpeg "march")
 
-![april](/assets/images/oddhorse-calendar-2024/april.jpeg "april")
+![april](/artifacts/oddhorse-calendar-2024/april.jpeg "april")
 
-![may](/assets/images/oddhorse-calendar-2024/may.jpeg "may")
+![may](/artifacts/oddhorse-calendar-2024/may.jpeg "may")
 
-![june](/assets/images/oddhorse-calendar-2024/june.jpeg "june")
+![june](/artifacts/oddhorse-calendar-2024/june.jpeg "june")
 
-![july](/assets/images/oddhorse-calendar-2024/july.jpeg "july")
+![july](/artifacts/oddhorse-calendar-2024/july.jpeg "july")
 
-![august](/assets/images/oddhorse-calendar-2024/august.jpeg "august")
+![august](/artifacts/oddhorse-calendar-2024/august.jpeg "august")
 
-![september](/assets/images/oddhorse-calendar-2024/september.jpeg "september")
+![september](/artifacts/oddhorse-calendar-2024/september.jpeg "september")
 
-![october](/assets/images/oddhorse-calendar-2024/october.jpeg "october")
+![october](/artifacts/oddhorse-calendar-2024/october.jpeg "october")
 
-![november](/assets/images/oddhorse-calendar-2024/november.jpeg "november")
+![november](/artifacts/oddhorse-calendar-2024/november.jpeg "november")
 
-![december](/assets/images/oddhorse-calendar-2024/december.jpeg "december")
+![december](/artifacts/oddhorse-calendar-2024/december.jpeg "december")
 
-![now that's an odd horse!](/assets/images/oddhorse-calendar-2024/now-that-s-an-odd-horse--2.jpg "now that's an odd horse!")
+![now that's an odd horse!](/artifacts/oddhorse-calendar-2024/now-that-s-an-odd-horse--2.jpg "now that's an odd horse!")
 
 a perversion of horse calendars for horse girl types. odd horses, if you will! made as merch for oddhorse; sold in limited run at printed matter in nyc; displayed in nyu gallery night in late 2024.
 

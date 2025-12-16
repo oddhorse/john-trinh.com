@@ -6,10 +6,10 @@ date: 2021-01-01
 tags:
   - tech
   - brand
-image: /assets/images/oddhorse-website/screenshot-of-homepage.png
+image: /artifacts/oddhorse-website/screenshot-of-homepage.png
 ---
 
-![screenshot of homepage](/assets/images/oddhorse-website/screenshot-of-homepage.png "screenshot of homepage")
+![screenshot of homepage](/artifacts/oddhorse-website/screenshot-of-homepage.png "screenshot of homepage")
 
 <https://odd.horse>
 (main)

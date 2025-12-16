@@ -7,17 +7,17 @@ tags:
   - tech
   - performance
   - hardware
-image: /assets/images/glove-controller/demo-video.mp4
+image: /artifacts/glove-controller/demo-video.mp4
 ---
 
 <video controls width="100%">
-  <source src="/assets/images/glove-controller/demo-video.mp4" type="video/mp4">
+  <source src="/artifacts/glove-controller/demo-video.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
-![conductive fabric on fingers](/assets/images/glove-controller/conductive-fabric-on-fingers.jpeg "conductive fabric on fingers")
+![conductive fabric on fingers](/artifacts/glove-controller/conductive-fabric-on-fingers.jpeg "conductive fabric on fingers")
 
-![image](/assets/images/glove-controller/image-3.jpg)
+![image](/artifacts/glove-controller/image-3.jpg)
 
 i wanted a midi controller that wasn't stuck in one place on stage, burdened by wired connections, or gesture-based (eg. imogen heap's mimu). 
 

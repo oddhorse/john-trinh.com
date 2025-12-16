@@ -8,10 +8,10 @@ tags:
   - marketing
   - tech
   - brand
-image: /assets/images/the-cat-keyboard-project/the-devil-in-question.png
+image: /artifacts/the-cat-keyboard-project/the-devil-in-question.png
 ---
 
-![the devil in question](/assets/images/the-cat-keyboard-project/the-devil-in-question.png "the devil in question")
+![the devil in question](/artifacts/the-cat-keyboard-project/the-devil-in-question.png "the devil in question")
 
 last summer i went all-in on reels for my artist project. for some reason, this series was my biggest success, totaling to ~2.5 million views. while it does involve me modifying electronics, that part should be really unimpressive to anyone who knows about circuitry. in spirit, this was a social media campaign first and foremost!
 
