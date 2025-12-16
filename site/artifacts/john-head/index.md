@@ -7,18 +7,18 @@ tags:
   - tech
   - 3d
   - silly + fun
-image: /assets/images/john-head/this-guy-s-all-over-this-website-.gif
+image: /artifacts/john-head/this-guy-s-all-over-this-website-.gif
 ---
 
-![this guy's all over this website!](/assets/images/john-head/this-guy-s-all-over-this-website-.gif "this guy's all over this website!")
+![this guy's all over this website!](/artifacts/john-head/this-guy-s-all-over-this-website-.gif "this guy's all over this website!")
 
-![head texture](/assets/images/john-head/head-texture.png "head texture")
+![head texture](/artifacts/john-head/head-texture.png "head texture")
 
-![render 1](/assets/images/john-head/render-1.jpeg)
+![render 1](/artifacts/john-head/render-1.jpeg)
 
-![render 2](/assets/images/john-head/render-2.jpeg)
+![render 2](/artifacts/john-head/render-2.jpeg)
 
-![render 3](/assets/images/john-head/render-3.jpeg)
+![render 3](/artifacts/john-head/render-3.jpeg)
 
 i thought it would be fun to 3d model my head. i'd been learning about hair modeling systems in blender so i figured i'd give myself some nice hair too. my face has since changed shape so i might redo this soon!
 

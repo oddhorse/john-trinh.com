@@ -7,15 +7,15 @@ tags:
   - tech
   - max for live
   - silly + fun
-image: /assets/images/brainrot-(max-for-live)/cover-animation.gif
+image: /artifacts/brainrot-(max-for-live)/cover-animation.gif
 ---
 
 <video controls width="100%" loop>
-  <source src="/assets/images/brainrot-(max-for-live)/demo-video.mov" type="video/quicktime">
+  <source src="/artifacts/brainrot-(max-for-live)/demo-video.mov" type="video/quicktime">
   Your browser does not support the video tag.
 </video>
 
-![cover animation](/assets/images/brainrot-(max-for-live)/cover-animation.gif)
+![cover animation](/artifacts/brainrot-(max-for-live)/cover-animation.gif)
 
 sometimes you need to lock in. sometimes you need some extra concentration in that ableton live session. being german, ableton does not know how to have any sort of fun offer a good solution for this. thank god i do! shoutout tiktok shoutout peter griffin. this is just what the doctor ordered!
 

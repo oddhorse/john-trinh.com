@@ -34,11 +34,13 @@ npm run bench           # Run with performance metrics (DEBUG=Eleventy:Benchmark
 │   ├── footer.njk      # Footer
 │   └── artifact.njk    # Artifact detail page template
 ├── artifacts/          # Portfolio items (collection)
-│   ├── *.md            # Individual artifacts
+│   ├── bodach/         # Individual artifact folder
+│   │   ├── index.md    # Artifact content
+│   │   ├── *.png       # Images directly alongside
+│   │   └── *.mp4       # Videos directly alongside
+│   ├── [13 more artifacts]
 │   └── artifacts.json  # Collection metadata (layout, tags)
 ├── assets/             # Static assets (pass-through copied)
-│   └── images/
-│       └── [artifact-name]/  # Images organized by artifact
 ├── index.md            # Homepage
 ├── about.md            # About page
 └── artifacts.njk       # Artifacts listing page
@@ -53,7 +55,7 @@ npm run bench           # Run with performance metrics (DEBUG=Eleventy:Benchmark
 - Content is injected via `{{ content | safe }}`
 
 ### Collections
-- **artifacts collection**: Auto-generated from files in `/site/artifacts/` directory
+- **artifacts collection**: Auto-generated from index.md files in `/site/artifacts/*/` subdirectories
 - Collection configuration in `/site/artifacts/artifacts.json`
 - All artifacts tagged with `["artifacts", "portfolio"]`
 
@@ -75,8 +77,9 @@ npm run bench           # Run with performance metrics (DEBUG=Eleventy:Benchmark
 ## Creating New Content
 
 ### Adding an Artifact
-1. Create markdown file in `/site/artifacts/[artifact-name].md`
-2. Add front-matter:
+1. Create folder `/site/artifacts/[artifact-name]/`
+2. Create `index.md` inside the folder
+3. Add front-matter:
 ```yaml
 ---
 title: Artifact Title
@@ -84,13 +87,14 @@ time: nov 2022                    # Display format for time period
 subtitle: Brief description
 date: 2022-11-15                  # YYYY-MM-DD for sorting
 tags: [artifacts, portfolio]      # Required for collection
-image: /assets/images/[artifact]/cover.png
+image: /artifacts/[artifact-name]/cover.png
 layout: artifact.njk              # Auto-applied via artifacts.json
 ---
 ```
-3. Add images to `/site/assets/images/[artifact-name]/`
-4. Write content in markdown (HTML supported)
-5. Images automatically get figcaption support via markdown-it-implicit-figures
+4. Add images/videos directly in the same folder (alongside index.md)
+5. Write content in markdown (HTML supported)
+6. Reference assets using `/artifacts/[artifact-name]/filename.ext`
+7. Images automatically get figcaption support via markdown-it-implicit-figures
 
 ### Markdown Features
 - Standard markdown syntax supported

@@ -1,7 +1,28 @@
 import markdownIt from "markdown-it";
 import implicitFigures from "markdown-it-implicit-figures";
 
+// get git info
+import simpleGit from "simple-git";
+
+// git info prep function
+const git = simpleGit();
+async function getGitInfo() {
+	const branchSummary = await git.branch();
+	const log = await git.log({ n: 1 });
+	return {
+		branch: branchSummary.current,
+		commit: log.latest.hash,
+		shortcommit: log.latest.hash.slice(0, 7),
+	};
+}
+
 export default async function (eleventyConfig) {
+	// fetches git info as `gitInfo` to use at build time and inject in pages
+	eleventyConfig.addGlobalData("gitInfo", await getGitInfo());
+
+	// current year for copyright footer
+	eleventyConfig.addGlobalData("year", new Date().getFullYear());
+
 	// source dir
 	eleventyConfig.setInputDirectory("site");
 	// for parts and pieces (relative to source dir)
@@ -9,6 +30,10 @@ export default async function (eleventyConfig) {
 
 	// copy to exports verbatim
 	eleventyConfig.addPassthroughCopy("site/assets");
+	// copy artifact assets (images, videos) from artifact folders
+	eleventyConfig.addPassthroughCopy(
+		"site/artifacts/**/*.{png,jpg,jpeg,gif,mp4,mov}",
+	);
 
 	// output dir
 	eleventyConfig.setOutputDirectory("dist");
