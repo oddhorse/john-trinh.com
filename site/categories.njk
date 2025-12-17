@@ -1,0 +1,47 @@
+---
+pagination:
+  data: categories
+  size: 1
+  alias: category
+permalink: "{{ category.permalink }}"
+eleventyComputed:
+  title: "{{ category.title }}"
+categories:
+  - title: "john trinh"
+    filter: null
+    permalink: "/"
+  - title: "tech"
+    filter: "tech"
+    permalink: "/tech/"
+  - title: "art"
+    filter: "art"
+    permalink: "/art/"
+  - title: "brand"
+    filter: "brand"
+    permalink: "/brand/"
+---
+
+<h1>{{ category.title }}</h1>
+
+<nav>
+    <a href="/">all</a>
+    <a href="/tech/">tech</a>
+    <a href="/art/">art</a>
+    <a href="/brand/">brand</a>
+</nav>
+
+<ul>
+    {% for artifact in collections.artifacts | reverse %}
+        {% if not category.filter or artifact.data.tags.includes(category.filter) %}
+            <li>
+                {% if artifact.data.image %}
+                    <img src="{{ artifact.data.image }}" alt="{{ artifact.data.title }} image" style="max-width:200px;display:block;">
+                {% endif %}
+                <a href="{{ artifact.url }}">{{ artifact.data.title }}</a>
+                {% if artifact.data.subtitle %}
+                    <span> — {{ artifact.data.subtitle }}</span>
+                {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
