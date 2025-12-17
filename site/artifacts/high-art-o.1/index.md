@@ -8,10 +8,10 @@ tags:
   - visual
   - collab
   - live rigs
-image: /artifacts/high-art-o.1/cover.png
+image: cover.png
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/g_kIuch5jUA?si=sv740f2bmcvG2tMx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+@[youtube](g_kIuch5jUA)
 
 collaboration with [francesca gautreau](https://www.instagram.com/francesca.gautreau). (<3)
 
@@ -38,7 +38,7 @@ running bits is also an integral part of the performance. francesca and i are wh
 
 VISUAL RIG IS ALL TOUCHDESIGNER BABY!! i threw it together in like four hours. didn't know how to use touchdesigner very well. especially didn't know how to do 3d in there, which this required (best way for dynamic z axis, to show each newest artifact on top)
 
-![touchdesigner](/artifacts/high-art-o.1/td.png "touchdesigner slop")
+![touchdesigner](td.png "touchdesigner slop")
 
 for the still images' audio, francesca set up simplers in a drum rack in ableton live. i think this was her first time doing this and it was probably very stressful because we were throwing that together like an hour before rehearsal. but we preservered and it was beautiful.
 

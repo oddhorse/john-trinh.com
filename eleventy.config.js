@@ -1,6 +1,7 @@
 import markdownIt from "markdown-it";
 import implicitFigures from "markdown-it-implicit-figures";
-import artifactPathsPlugin from "./lib/markdown-it-artifact-paths.js";
+import markdownItVideo from "@vrcd-community/markdown-it-video";
+import artifactPathTransform from "./lib/artifact-path-transform.js";
 
 // get git info
 import simpleGit from "simple-git";
@@ -16,8 +17,6 @@ async function getGitInfo() {
 		shortcommit: log.latest.hash.slice(0, 7),
 	};
 }
-
-console.log("ELEVENTY RUN MODE:", process.env.ELEVENTY_RUN_MODE);
 
 export default async function (eleventyConfig) {
 	// fetches git info as `gitInfo` to use at build time and inject in pages
@@ -60,8 +59,14 @@ export default async function (eleventyConfig) {
 			.use(implicitFigures, {
 				figcaption: true,
 			})
-			.use(artifactPathsPlugin),
+			.use(markdownItVideo, {
+				youtube: { width: 560, height: 315 },
+				vimeo: { width: 560, height: 315 },
+			}),
 	);
+
+	// Add transform for artifact relative paths
+	eleventyConfig.addTransform("artifactPaths", artifactPathTransform);
 
 	// Filter out draft content in production
 	eleventyConfig.addCollection("artifacts", (collectionApi) => {

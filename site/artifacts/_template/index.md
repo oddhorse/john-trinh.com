@@ -3,9 +3,9 @@ title: ARTIFACT TITLE
 time: semantic time, can be as specific or nonspecific as you want!
 subtitle: brief description or medium or category
 date: 2003-10-24
-tags: 
+tags:
   - etc
-image: /artifacts/artifact-slug/cover-image.png
+image: cover-image.png
 draft: true
 ---
 
@@ -20,29 +20,42 @@ More details about the project. You can use:
 - *Italic text*
 - [Links](https://example.com)
 
-<!-- Recommended: Use relative paths for images in this artifact folder -->
+## Images
+
+Use relative paths - they'll auto-expand to `/artifacts/artifact-slug/...`:
+
 ![Alt text for image](image-name.png "caption for image")
 
-<!-- Also works: Subdirectories -->
+<!-- Subdirectories work too -->
 ![Another image](subfolder/image.png)
 
-<!-- Absolute paths still work (for referencing other artifacts or /assets/) -->
+<!-- Absolute paths for referencing other artifacts or /assets/ -->
 ![External reference](/artifacts/other-artifact/image.png)
 
 <!-- External URLs work -->
 ![External image](https://example.com/image.png)
 
-Images with caption text at end automatically get wrapped in `<figure>` tags with captions.
+Images with caption text automatically get wrapped in `<figure>` tags with captions.
 
-## Embedded HTML (if needed)
+## Videos
 
-You can embed HTML directly.
+### Local Videos
 
-Note: HTML video/img tags still need absolute paths (auto-prefixing only works for markdown images):
+Use HTML with relative paths (auto-expanded):
 
 <video controls style="max-width:100%;">
-  <source src="/artifacts/artifact-slug/video.mp4" type="video/mp4">
+  <source src="demo-video.mp4" type="video/mp4">
 </video>
+
+### YouTube
+
+Use clean markdown syntax:
+
+@[youtube](VIDEO_ID)
+
+### Vimeo
+
+@[vimeo](VIDEO_ID)
 
 ## Credits or Additional Info
 

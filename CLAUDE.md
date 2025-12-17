@@ -176,6 +176,19 @@ File-based routing (Eleventy default):
 
 - Use MarkdownLint style
 
+### Code Documentation
+
+- **Always comment liberally** - Future you (and other developers) should understand the code without having to trace through logic
+- Use JSDoc-style comments for file-level and function-level documentation
+- Include:
+  - **Why** the code exists (what problem it solves)
+  - **When** it runs (lifecycle timing for transforms, hooks, etc.)
+  - **What** it does (with concrete examples)
+  - **What it doesn't do** (edge cases, limitations)
+  - **How** it works (explain complex regex, logic, algorithms)
+- Add inline comments for non-obvious logic, regex patterns, and business rules
+- See `/lib/artifact-path-transform.js` and `/site/_data/eleventyComputed.js` as examples of good commenting
+
 ### General Principles
 
 - Minimal and intentional - only add what's needed
