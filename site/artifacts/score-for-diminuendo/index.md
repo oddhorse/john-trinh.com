@@ -11,11 +11,8 @@ tags:
 image: project-file.png
 ---
 
-<video controls width="100%">
-  <source src="video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+@[youtube](grnTulO2IRs)
 
-![project file](project-file.png "project file")
+![project file](project-file.png)
 
 the wonderful julian felix aaronson asked me to score this little thing. it turned out great! here you go. *smiles real big*

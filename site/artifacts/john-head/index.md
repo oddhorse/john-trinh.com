@@ -10,9 +10,9 @@ tags:
 image: this-guy-s-all-over-this-website-.gif
 ---
 
-![this guy's all over this website!](this-guy-s-all-over-this-website-.gif "this guy's all over this website!")
+![this guy's all over this website!](this-guy-s-all-over-this-website-.gif)
 
-![head texture](head-texture.png "head texture")
+![head texture](head-texture.png)
 
 ![render 1](render-1.jpeg)
 

@@ -9,10 +9,7 @@ tags:
 image: screenshot.png
 ---
 
-<video controls width="100%">
-  <source src="cult-setup.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+@[youtube](0Uki7sWEO8E)
 
 ![screenshot](screenshot.png)
 
@@ -20,4 +17,4 @@ i made this setup for college auditions. ended up taking like a month straight. 
 
 i love the idea of the "cult setup" floor arrangement. might have to revisit for irl performances.
 
-listen here!
+[this song is on streaming here!](https://too.fm/oddhorse-lost)

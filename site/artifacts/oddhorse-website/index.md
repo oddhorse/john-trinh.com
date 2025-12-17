@@ -9,7 +9,7 @@ tags:
 image: screenshot-of-homepage.png
 ---
 
-![screenshot of homepage](screenshot-of-homepage.png "screenshot of homepage")
+![screenshot of homepage](screenshot-of-homepage.png)
 
 <https://odd.horse>
 (main)

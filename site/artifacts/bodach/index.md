@@ -12,10 +12,7 @@ tags:
 image: title-card-1.png
 ---
 
-<video controls width="100%">
-  <source src="video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+@[youtube](8TIbGbtoJ9E)
 
 ![title card 1](title-card-1.png)
 
@@ -35,17 +32,15 @@ image: title-card-1.png
 
 ![credit card 3](credit-card-3.png)
 
-short film made with friends. originally for north springs charter high school film festival in 2022, but it was cancelled and we were very disappointed about that.
+short film made with two friends, [liv curry](https://www.instagram.com/1.1.1.1.i.v/) and [zoe mueller](https://www.instagram.com/friendlygirlonline/). originally for north springs charter high school film festival in 2022, but it was cancelled and we were very disappointed about that.
 
-BODACH is incredibly dumb in concept but aesthetically superb, if i say so myself.
+BODACH is incredibly dumb in concept but aesthetically superb.
 
-main contributions:
-concept
-graphic design
+## main contributions
 
-original score
-
-sound design
-audio editing
-
-acting
+- concept
+- graphic design
+- original score
+- sound design
+- audio editing
+- acting

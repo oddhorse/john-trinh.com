@@ -24,7 +24,7 @@ More details about the project. You can use:
 
 Use relative paths - they'll auto-expand to `/artifacts/artifact-slug/...`:
 
-![Alt text for image](image-name.png "caption for image")
+![Alt text for image](image-name.png)
 
 <!-- Subdirectories work too -->
 ![Another image](subfolder/image.png)

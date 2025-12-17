@@ -20,7 +20,7 @@ image: hdri-of-my-living-room.png
   Your browser does not support the video tag.
 </video>
 
-![hdri of my living room](hdri-of-my-living-room.png "hdri of my living room")
+![hdri of my living room](hdri-of-my-living-room.png)
 
 ![render](render.png)
 

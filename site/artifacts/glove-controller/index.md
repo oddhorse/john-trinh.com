@@ -7,19 +7,16 @@ tags:
   - tech
   - performance
   - hardware
-image: demo-video.mp4
+image: image-3.jpg
 ---
 
-<video controls width="100%">
-  <source src="demo-video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+@[youtube](UyG9i2Exsto)
 
-![conductive fabric on fingers](conductive-fabric-on-fingers.jpeg "conductive fabric on fingers")
+![conductive fabric on fingers](conductive-fabric-on-fingers.jpeg)
 
-![image](image-3.jpg)
+![look at it](image-3.jpg)
 
-i wanted a midi controller that wasn't stuck in one place on stage, burdened by wired connections, or gesture-based (eg. imogen heap's mimu). 
+i wanted a midi controller that wasn't stuck in one place on stage, burdened by wired connections, or gesture-based (eg. imogen heap's mimu).
 
 typical stationary midi controllers keep you locked to their location on stage. gesture-based controls on wearable controllers necessarily tie every movement you make to control changes, keeping your motion locked to your functional control scheme. with this glove controller, i can move around as crazy as i want on stage and have all my controls right on me! any control sent from the glove must be deliberately triggered by my actions.
 

@@ -15,9 +15,9 @@ image: cover-animation.gif
   Your browser does not support the video tag.
 </video>
 
-![cover animation](cover-animation.gif)
+![animation](cover-animation.gif)
 
-sometimes you need to lock in. sometimes you need some extra concentration in that ableton live session. being german, ableton does not know how to have any sort of fun offer a good solution for this. thank god i do! shoutout tiktok shoutout peter griffin. this is just what the doctor ordered!
+sometimes you need to lock in. sometimes you need extra concentration in that ableton live session. as a german company, ableton does not ~~know how to have any sort of fun~~ offer a good solution for this. thank god i do! shoutout tiktok. shoutout peter griffin. this is just what the doctor ordered!
 
 on the backend this runs an html+js page with the youtube api and maxjs hooks to communicate with the max environment.
-no download available yet so you will have to trust (or ask me) gumroad up soon lol
+no download available yet so you will have to trust that this does exist. or ask me for the file i dare you to do that. gumroad up soon lol

@@ -10,37 +10,37 @@ tags:
 image: front-of-calendar.jpg
 ---
 
-![front of calendar](front-of-calendar.jpg "front of calendar")
+![front of calendar](front-of-calendar.jpg)
 
-![back of calendar](back-of-calendar.jpg "back of calendar")
+![back of calendar](back-of-calendar.jpg)
 
-![now that's an odd horse!](now-that-s-an-odd-horse-.jpeg "now that's an odd horse!")
+![now that's an odd horse!](now-that-s-an-odd-horse-.jpeg)
 
-![january](january.jpeg "january")
+![january](january.jpeg)
 
-![february](february.jpeg "february")
+![february](february.jpeg)
 
-![march](march.jpeg "march")
+![march](march.jpeg)
 
-![april](april.jpeg "april")
+![april](april.jpeg)
 
-![may](may.jpeg "may")
+![may](may.jpeg)
 
-![june](june.jpeg "june")
+![june](june.jpeg)
 
-![july](july.jpeg "july")
+![july](july.jpeg)
 
-![august](august.jpeg "august")
+![august](august.jpeg)
 
-![september](september.jpeg "september")
+![september](september.jpeg)
 
-![october](october.jpeg "october")
+![october](october.jpeg)
 
-![november](november.jpeg "november")
+![november](november.jpeg)
 
-![december](december.jpeg "december")
+![december](december.jpeg)
 
-![now that's an odd horse!](now-that-s-an-odd-horse--2.jpg "now that's an odd horse!")
+![now that's an odd horse!](now-that-s-an-odd-horse--2.jpg)
 
 a perversion of horse calendars for horse girl types. odd horses, if you will! made as merch for oddhorse; sold in limited run at printed matter in nyc; displayed in nyu gallery night in late 2024.
 

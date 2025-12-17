@@ -10,14 +10,14 @@ tags:
 image: more-designs-.png
 ---
 
-![more designs.](more-designs-.png "more designs.")
+![more designs.](more-designs-.png)
 
-![neighh](neighh.png "neighh")
+![neighh](neighh.png)
 
-![image](image-3.jpg)
+![a horse in the wild](image-3.jpg)
 
-![horses in the wild](horses-in-the-wild.jpg "horses in the wild")
+![another horse in the wild](horses-in-the-wild.jpg)
 
-![poster concepts](poster-concepts.png "poster concepts")
+![poster concepts](poster-concepts.png)
 
 qr codes for my artist project, <a href="https://odd.horse" target="_blank" rel="noopener">oddhorse</a>. colorful and fully functional. an innovation in qr code form, presentation, and perception. incredibly loud while not saying a word...
