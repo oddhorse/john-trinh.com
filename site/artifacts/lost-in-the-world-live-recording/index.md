@@ -1,5 +1,5 @@
 ---
-title: \"Lost in the world" live video
+title: '"Lost in the world" live video'
 time: dec 2023
 subtitle: performance with live digital rig
 date: 2023-12-01

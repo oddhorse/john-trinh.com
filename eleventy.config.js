@@ -16,12 +16,20 @@ async function getGitInfo() {
 	};
 }
 
+console.log("ELEVENTY RUN MODE:", process.env.ELEVENTY_RUN_MODE);
+
 export default async function (eleventyConfig) {
 	// fetches git info as `gitInfo` to use at build time and inject in pages
 	eleventyConfig.addGlobalData("gitInfo", await getGitInfo());
 
 	// current year for copyright footer
 	eleventyConfig.addGlobalData("year", new Date().getFullYear());
+
+	// dev mode?
+	eleventyConfig.addGlobalData(
+		"isDev",
+		process.env.ELEVENTY_RUN_MODE === "serve",
+	);
 
 	// source dir
 	eleventyConfig.setInputDirectory("site");
@@ -51,4 +59,16 @@ export default async function (eleventyConfig) {
 			figcaption: true,
 		}),
 	);
+
+	// Filter out draft content in production
+	eleventyConfig.addCollection("artifacts", (collectionApi) => {
+		const isDev = process.env.ELEVENTY_RUN_MODE === "serve";
+
+		return collectionApi
+			.getFilteredByGlob("site/artifacts/*/index.md")
+			.filter((item) => {
+				// Show drafts in dev mode, hide in production
+				return isDev || !item.data.draft;
+			});
+	});
 }
