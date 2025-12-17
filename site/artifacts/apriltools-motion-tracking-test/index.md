@@ -7,22 +7,22 @@ tags:
   - tech
   - 3d
   - silly + fun
-image: /artifacts/apriltools-motion-tracking-test/hdri-of-my-living-room.png
+image: hdri-of-my-living-room.png
 ---
 
 <video controls width="100%" loop>
-  <source src="/artifacts/apriltools-motion-tracking-test/magic.mov" type="video/quicktime">
+  <source src="magic.mov" type="video/quicktime">
   Your browser does not support the video tag.
 </video>
 
 <video controls width="100%">
-  <source src="/artifacts/apriltools-motion-tracking-test/the-raw-footage.mov" type="video/quicktime">
+  <source src="the-raw-footage.mov" type="video/quicktime">
   Your browser does not support the video tag.
 </video>
 
-![hdri of my living room](/artifacts/apriltools-motion-tracking-test/hdri-of-my-living-room.png "hdri of my living room")
+![hdri of my living room](hdri-of-my-living-room.png "hdri of my living room")
 
-![render](/artifacts/apriltools-motion-tracking-test/render.png)
+![render](render.png)
 
 my first attempt at a few things: motion tracking, photorealistic 3d, integrating 3d renders into real footage, and compositing for vfx. no purpose. i just wanted to do it.
 

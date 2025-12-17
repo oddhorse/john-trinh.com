@@ -1,6 +1,6 @@
 ---
 title: HIGH ART O.1
-time: nov 25, 2025
+time: nov 25 2025
 subtitle: audio-visual performance piece
 date: 2025-11-25
 tags:
