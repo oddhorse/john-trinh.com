@@ -20,13 +20,25 @@ More details about the project. You can use:
 - *Italic text*
 - [Links](https://example.com)
 
-![Alt text for image](/artifacts/artifact-slug/image-name.png)
+<!-- Recommended: Use relative paths for images in this artifact folder -->
+![Alt text for image](image-name.png "caption for image")
 
-Images with alt text automatically get wrapped in `<figure>` tags with captions.
+<!-- Also works: Subdirectories -->
+![Another image](subfolder/image.png)
+
+<!-- Absolute paths still work (for referencing other artifacts or /assets/) -->
+![External reference](/artifacts/other-artifact/image.png)
+
+<!-- External URLs work -->
+![External image](https://example.com/image.png)
+
+Images with caption text at end automatically get wrapped in `<figure>` tags with captions.
 
 ## Embedded HTML (if needed)
 
-You can embed HTML directly:
+You can embed HTML directly.
+
+Note: HTML video/img tags still need absolute paths (auto-prefixing only works for markdown images):
 
 <video controls style="max-width:100%;">
   <source src="/artifacts/artifact-slug/video.mp4" type="video/mp4">

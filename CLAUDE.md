@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Personal portfolio site for John Trinh (musician, audio engineer, developer, designer). Built with Eleventy 3.1.2 static site generator.
 
 **Tech Stack:**
+
 - Eleventy 3.1.2 (static site generator)
 - Nunjucks templating
 - markdown-it with implicit-figures plugin (for image captions)
@@ -25,6 +26,7 @@ npm run bench           # Run with performance metrics (DEBUG=Eleventy:Benchmark
 ## Architecture
 
 ### Directory Structure
+
 ```
 /site/                   # Source files (input directory)
 ├── _includes/           # Reusable templates
@@ -49,12 +51,14 @@ npm run bench           # Run with performance metrics (DEBUG=Eleventy:Benchmark
 ```
 
 ### Template Hierarchy
+
 - All pages use `base.njk` as default layout (set globally in eleventy.config.js)
 - `base.njk` includes: head.njk, header.njk, content block, footer.njk
 - Artifacts use `artifact.njk` layout (inherits from base.njk)
 - Content is injected via `{{ content | safe }}`
 
 ### Collections
+
 - **artifacts collection**: Auto-generated from index.md files in `/site/artifacts/*/` subdirectories
 - Collection configuration in `/site/artifacts/artifacts.json`
 - All artifacts tagged with `["artifacts", "portfolio"]`
@@ -62,6 +66,7 @@ npm run bench           # Run with performance metrics (DEBUG=Eleventy:Benchmark
 ## Configuration Files
 
 ### eleventy.config.js
+
 - Input directory: `site/`
 - Includes directory: `site/_includes/`
 - Output directory: `dist/`
@@ -70,6 +75,7 @@ npm run bench           # Run with performance metrics (DEBUG=Eleventy:Benchmark
 - Markdown library: markdown-it with HTML support + implicit-figures plugin (figcaption enabled)
 
 ### .editorconfig
+
 - Default: tab indentation
 - JS/JSX/TS files: 2-space indents
 - CSS files: 3-space indents
@@ -77,9 +83,11 @@ npm run bench           # Run with performance metrics (DEBUG=Eleventy:Benchmark
 ## Creating New Content
 
 ### Adding an Artifact
+
 1. Create folder `/site/artifacts/[artifact-name]/`
 2. Create `index.md` inside the folder
 3. Add front-matter:
+
 ```yaml
 ---
 title: Artifact Title
@@ -91,12 +99,14 @@ image: /artifacts/[artifact-name]/cover.png
 layout: artifact.njk              # Auto-applied via artifacts.json
 ---
 ```
+
 4. Add images/videos directly in the same folder (alongside index.md)
 5. Write content in markdown (HTML supported)
 6. Reference assets using `/artifacts/[artifact-name]/filename.ext`
 7. Images automatically get figcaption support via markdown-it-implicit-figures
 
 ### Markdown Features
+
 - Standard markdown syntax supported
 - HTML can be embedded directly (html: true in markdown-it config)
 - Images with alt text automatically wrapped in `<figure>` tags with `<figcaption>`
@@ -106,6 +116,7 @@ layout: artifact.njk              # Auto-applied via artifacts.json
 **Automatic deployment via GitHub Actions on push to `main` branch.**
 
 ### Workflow Steps
+
 1. Checkout code
 2. Setup Node.js 20 with npm caching
 3. Install dependencies (`npm ci`)
@@ -114,6 +125,7 @@ layout: artifact.njk              # Auto-applied via artifacts.json
 6. Deploy via rsync to production server
 
 ### Required GitHub Secrets
+
 - `SSH_PRIVATE_KEY` - Private key for server authentication
 - `SSH_HOST` - Server IP address
 - `SSH_USER` - SSH username
@@ -123,7 +135,50 @@ See detailed setup instructions in `.github/workflows/main.yml` comments.
 ## Routing
 
 File-based routing (Eleventy default):
+
 - `site/index.md` → `/index.html`
 - `site/about.md` → `/about/index.html`
 - `site/artifacts/[name].md` → `/artifacts/[name]/index.html`
 - `site/artifacts.njk` → `/artifacts/index.html`
+
+## Development Standards
+
+**Always use best practices and modern standards when implementing features:**
+
+### CSS
+
+- Use flexbox/grid for layouts (avoid floats, absolute positioning hacks)
+- Use viewport units (`vh`, `vw`) for responsive sizing
+- Prefer modern properties: `gap` over margins, logical properties when appropriate
+- Use semantic selectors (element selectors, direct child `>`) over unnecessary classes
+- Follow the project's minimal styling philosophy - keep HTML semantic and CSS scoped
+
+### Eleventy/Nunjucks
+
+- Use native Nunjucks filters and syntax over custom implementations when possible
+- Leverage Eleventy's collections, pagination, and data cascade features
+- Keep templates DRY - use includes and layouts appropriately
+- Use front matter for page-specific configuration
+- Respect the directory structure and naming conventions
+
+### JavaScript (ES6 Modules)
+
+- Use ES6 module syntax (`import`/`export`)
+- Use modern JavaScript features: destructuring, arrow functions, template literals, async/await
+- Follow the project's minimal JavaScript philosophy - only add JS when necessary
+- Respect the `.editorconfig` settings (2-space indents for JS files)
+
+### HTML
+
+- Semantic HTML first - use appropriate elements (`<article>`, `<dl>`, `<nav>`, etc.)
+
+### Markdown
+
+- Use MarkdownLint style
+
+### General Principles
+
+- Minimal and intentional - only add what's needed
+- Use the most modern standards for development
+- Mobile-first and responsive by default
+- Keep code readable and maintainable over clever solutions

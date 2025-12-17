@@ -5,6 +5,7 @@ subtitle: performance with live digital rig
 date: 2023-12-01
 tags:
   - performance
+  - music
 image: /artifacts/lost-in-the-world-live-recording/screenshot.png
 ---
 
