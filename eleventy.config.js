@@ -1,5 +1,6 @@
 import markdownIt from "markdown-it";
 import implicitFigures from "markdown-it-implicit-figures";
+import artifactPathsPlugin from "./lib/markdown-it-artifact-paths.js";
 
 // get git info
 import simpleGit from "simple-git";
@@ -55,9 +56,11 @@ export default async function (eleventyConfig) {
 	};
 	eleventyConfig.setLibrary(
 		"md",
-		markdownIt(options).use(implicitFigures, {
-			figcaption: true,
-		}),
+		markdownIt(options)
+			.use(implicitFigures, {
+				figcaption: true,
+			})
+			.use(artifactPathsPlugin),
 	);
 
 	// Filter out draft content in production

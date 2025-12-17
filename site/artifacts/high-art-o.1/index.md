@@ -34,7 +34,7 @@ running bits is also an integral part of the performance. francesca and i are wh
 
 5 am. performance due for public showing the next day. francesca and i are sitting in a room. she is making visuals and curating more. i am trying to figure out how to technically pull our idea off. i download resolume because i thought i couldn't pull off the touchdesigner rig in time. resolume is a big mistake and has no free version.
 
-![artifacts](/artifacts/high-art-o.1/visuals.png "visual artifacts handpicked by francesca")
+![artifacts](visuals.png "visual artifacts handpicked by francesca")
 
 VISUAL RIG IS ALL TOUCHDESIGNER BABY!! i threw it together in like four hours. didn't know how to use touchdesigner very well. especially didn't know how to do 3d in there, which this required (best way for dynamic z axis, to show each newest artifact on top)
 
