@@ -9,7 +9,6 @@ portfolio. artist project at [odd.horse](https://odd.horse)
 ## to-dos
 
 [ ] add basic css
-[ ] image optimization/thumbnail generation
 [ ] make local shortcut for referencing images and stuff (so we don't have to do /artifacts/[name]/image.png each time)
 [ ] filter by skill
 [ ] system for custom page view stuff (send specific selection of things to specific companies/employers)
@@ -26,10 +25,10 @@ portfolio. artist project at [odd.horse](https://odd.horse)
 [ ] have claude strengthen elements in html head
 [ ] have claude inventory artifacts and determine what needs what (process videos, any artwork at all, etc)
 [ ] figure out more of a standard for the subtitle lines
+[ ] provide site.webmanifest
 
 ### portfolio pieces missing
 
-[ ] pill bottle
 [ ] so far from home cover and design bits
 [ ] fish song cover art
 [ ] fish song visualizer

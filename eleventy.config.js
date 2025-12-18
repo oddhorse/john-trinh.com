@@ -2,6 +2,7 @@ import markdownIt from "markdown-it";
 import implicitFigures from "markdown-it-implicit-figures";
 import markdownItVideo from "@vrcd-community/markdown-it-video";
 import artifactPathTransform from "./lib/artifact-path-transform.js";
+import imageOptimizeTransform from "./lib/image-optimize-transform.js";
 import { thumbnailImg, responsiveImg } from "./lib/image-shortcodes.js";
 
 // get git info
@@ -68,6 +69,10 @@ export default async function (eleventyConfig) {
 
 	// Add transform for artifact relative paths
 	eleventyConfig.addTransform("artifactPaths", artifactPathTransform);
+
+	// Add transform for automatic image optimization
+	// Runs AFTER artifactPaths so paths are already absolute
+	eleventyConfig.addTransform("optimizeImages", imageOptimizeTransform);
 
 	// Add image optimization shortcodes
 	eleventyConfig.addAsyncShortcode("thumbnailImg", thumbnailImg);

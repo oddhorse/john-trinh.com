@@ -63,6 +63,50 @@ npm run bench           # Run with performance metrics (DEBUG=Eleventy:Benchmark
 - Collection configuration in `/site/artifacts/artifacts.json`
 - All artifacts tagged with `["artifacts", "portfolio"]`
 
+## Image Optimization
+
+**All images are automatically optimized at build time** - no manual intervention required!
+
+### How It Works
+
+1. **Markdown images** (`![alt](image.png)`) are automatically converted to responsive `<picture>` elements
+2. **Multiple sizes generated**: 400px, 800px, 1200px, 1600px (covers mobile to desktop)
+3. **Modern formats**: WebP (smaller, modern) + JPEG (fallback for older browsers)
+4. **Lazy loading**: `loading="lazy"` and `decoding="async"` added automatically
+5. **GIFs preserved**: Animated GIFs kept as regular `<img>` tags (no conversion)
+6. **Thumbnails**: Listing pages use 300px optimized thumbnails via `thumbnailImg` shortcode
+
+### Generated Output
+
+Images are optimized and stored in their artifact folders:
+- `/dist/artifacts/[name]/[filename]-400w.webp`
+- `/dist/artifacts/[name]/[filename]-800w.jpeg`
+- `/dist/artifacts/[name]/thumb-300w.webp` (for listings)
+
+### Manual Control (Optional)
+
+Add attributes to images in markdown for custom behavior:
+- `data-no-optimize` - Skip optimization entirely
+- `data-sizes="(max-width: 768px) 100vw, 50vw"` - Custom sizes attribute
+
+**Example:**
+```html
+<img src="image.png" data-no-optimize>
+```
+
+### Implementation Files
+
+- `/lib/image-optimize-transform.js` - HTML transform for automatic optimization
+- `/lib/image-shortcodes.js` - Shortcodes for thumbnails and manual responsive images
+- `/lib/artifact-path-transform.js` - Converts relative paths to absolute
+- `/site/_data/eleventyComputed.js` - Pre-processes front matter image paths
+
+### Build Time Impact
+
+- **First build**: ~30 seconds (generates all optimized images)
+- **Subsequent builds**: ~2-5 seconds (uses cached optimized images)
+- Images are cached in `node_modules/.cache/eleventy-img/`
+
 ## Configuration Files
 
 ### eleventy.config.js
@@ -70,9 +114,11 @@ npm run bench           # Run with performance metrics (DEBUG=Eleventy:Benchmark
 - Input directory: `site/`
 - Includes directory: `site/_includes/`
 - Output directory: `dist/`
-- Pass-through copy: `site/assets/` → `dist/assets/`
+- Pass-through copy: `site/assets/` → `dist/assets/`, artifact images (source files)
 - Global layout: `base.njk`
 - Markdown library: markdown-it with HTML support + implicit-figures plugin (figcaption enabled)
+- Transforms: `artifactPaths` (path resolution) → `optimizeImages` (automatic optimization)
+- Shortcodes: `thumbnailImg`, `responsiveImg`
 
 ### .editorconfig
 
