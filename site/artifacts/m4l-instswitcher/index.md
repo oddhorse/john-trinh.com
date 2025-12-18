@@ -8,7 +8,7 @@ tags:
   - max for live
   - dsp
   - performance tool
-image: cover-image.png
+image: 
 draft: true
 ---
 

@@ -6,7 +6,7 @@ date: 2023-04-15
 tags:
   - 3d
   - animation
-image: cover-image.png
+image: 
 draft: true
 ---
 

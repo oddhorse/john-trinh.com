@@ -8,7 +8,7 @@ tags:
   - tech
   - performance
   - hardware
-image: cover-image.png
+image: 
 draft: true
 # TODO: finish!
 ---

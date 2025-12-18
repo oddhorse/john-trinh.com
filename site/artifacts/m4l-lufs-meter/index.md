@@ -7,7 +7,7 @@ tags:
   - tech
   - max for live
   - dsp
-image: cover-image.png
+image: 
 draft: true
 ---
 

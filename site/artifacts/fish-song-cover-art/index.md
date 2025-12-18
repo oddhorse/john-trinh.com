@@ -10,7 +10,9 @@ image: cover.png
 draft: true
 ---
 
-TODO: finish
+TODO: finish!
+
+[fish song cover art.](cover.png)
 
 @[youtube](SfQ-xSIDqqw)
 

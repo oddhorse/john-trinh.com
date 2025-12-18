@@ -6,7 +6,7 @@ date: 2025-12-01
 tags:
   - web dev
   - tech
-image: cover-image.png
+image: 
 draft: true
 # TODO: update cover image with a recursive neat thing once the site is visually designed
 ---

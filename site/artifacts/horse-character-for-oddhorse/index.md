@@ -8,7 +8,7 @@ tags:
   - character design
   - brand
   - animation
-image: cover-image.png
+image: 
 draft: true
 # TODO: FINISH
 ---

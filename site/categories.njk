@@ -39,7 +39,7 @@ categories:
       .includes(category.filter) %}
       <li>
         {% if artifact.data.image %}
-          <img src="{{ artifact.data.image }}" alt="{{ artifact.data.title }} image" style="max-width:200px;display:block;">
+          {% thumbnailImg artifact.data.image, artifact.data.title %}
         {% endif %}
         <a href="{{ artifact.url }}">{{ artifact.data.title }}</a>
         {% if artifact.data.draft %}
