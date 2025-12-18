@@ -5,8 +5,8 @@ subtitle: hardware
 date: 2025-02-01
 tags:
   - tech
-  - performance
   - hardware
+  - performance tool
 image: image-3.jpg
 ---
 

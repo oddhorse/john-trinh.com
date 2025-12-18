@@ -23,11 +23,13 @@ portfolio. artist project at [odd.horse](https://odd.horse)
 [ ] add a category page for each tag, with a cheeky description
 [ ] add a tag browser?
 [ ] make picture for each listing clickable
-[ ] have claude strengthen head elements
+[ ] have claude strengthen elements in html head
+[ ] have claude inventory artifacts and determine what needs what (process videos, any artwork at all, etc)
+[ ] figure out more of a standard for the subtitle lines
 
 ### portfolio pieces missing
 
-[ ] oddhorse 3d horse character
-[ ] all the other m4l devices
-[ ] boxing glove performance
-[ ] this website
+[ ] pill bottle
+[ ] so far from home cover and design bits
+[ ] fish song cover art
+[ ] fish song visualizer
