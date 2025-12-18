@@ -30,5 +30,4 @@ portfolio. artist project at [odd.horse](https://odd.horse)
 ### portfolio pieces missing
 
 [ ] so far from home cover and design bits
-[ ] fish song cover art
 [ ] fish song visualizer
