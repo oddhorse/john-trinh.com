@@ -1,0 +1,334 @@
+[
+	{
+		"title": "cling to thin air",
+		"artist": "Sloane Simon",
+		"role": "Mastering Engineer",
+		"date": "2025-01-01",
+		"type": "client",
+		"format": "EP"
+	},
+	{
+		"title": "play pretend",
+		"artist": "Sloane Simon",
+		"role": "Mixing Engineer, Mastering Engineer",
+		"date": "2025-01-01",
+		"type": "client",
+		"format": "single",
+		"project": "cling to thin air EP"
+	},
+	{
+		"title": "cruel existence",
+		"artist": "Sloane Simon",
+		"role": "Mastering Engineer",
+		"date": "2025-01-01",
+		"type": "client",
+		"format": "single",
+		"project": "cling to thin air EP"
+	},
+	{
+		"title": "carry you home",
+		"artist": "Sloane Simon",
+		"role": "Mastering Engineer",
+		"date": "2025-01-01",
+		"type": "client",
+		"format": "single",
+		"project": "cling to thin air EP"
+	},
+	{
+		"title": "deep end",
+		"artist": "Sloane Simon",
+		"role": "Mastering Engineer",
+		"date": "2025-01-01",
+		"type": "client",
+		"format": "single",
+		"project": "cling to thin air EP"
+	},
+	{
+		"title": "God, It's Obvious",
+		"artist": "Misster",
+		"role": "Producer, Mastering Engineer",
+		"date": "2025-01-01",
+		"type": "client",
+		"format": "single"
+	},
+	{
+		"title": "45 Degrees",
+		"artist": "Zoe August",
+		"role": "Co-Producer",
+		"date": "2025-01-01",
+		"type": "client",
+		"format": "single"
+	},
+	{
+		"title": "Last Time",
+		"artist": "Shelby Ko",
+		"role": "Mastering Engineer",
+		"date": "2025-01-01",
+		"type": "client",
+		"format": "single"
+	},
+	{
+		"title": "So far from home",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2023-01-01",
+		"type": "original",
+		"format": "EP"
+	},
+	{
+		"title": "Forever, forever. ⌂ ☾",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2023-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "So far from home EP"
+	},
+	{
+		"title": "Now a little wiser than I was 〰〰",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2023-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "So far from home EP"
+	},
+	{
+		"title": "Shatters into light and everything else // ꩜꩜꩜",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2023-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "So far from home EP"
+	},
+	{
+		"title": "(unease)",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2023-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "So far from home EP"
+	},
+	{
+		"title": "Lost in the world ! ⤻⤥⟲",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2023-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "So far from home EP"
+	},
+	{
+		"title": "(...)",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2023-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "So far from home EP"
+	},
+	{
+		"title": "Adventure ✧»",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2023-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "So far from home EP"
+	},
+	{
+		"title": "RETROPROSPECTIVE vol.1",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2021-01-01",
+		"type": "original",
+		"format": "album"
+	},
+	{
+		"title": "Home.",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2021-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "RETROPROSPECTIVE vol.1"
+	},
+	{
+		"title": "i don't really know you, but i love you",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2021-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "RETROPROSPECTIVE vol.1"
+	},
+	{
+		"title": "Sadcomputer",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2021-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "RETROPROSPECTIVE vol.1"
+	},
+	{
+		"title": "she's wearing my jacket / decaturwinter",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2021-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "RETROPROSPECTIVE vol.1"
+	},
+	{
+		"title": "one more minute / solong",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2021-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "RETROPROSPECTIVE vol.1"
+	},
+	{
+		"title": "we're all a little broken",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2021-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "RETROPROSPECTIVE vol.1"
+	},
+	{
+		"title": "Wasteland",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2021-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "RETROPROSPECTIVE vol.1"
+	},
+	{
+		"title": "Wonderland",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2021-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "RETROPROSPECTIVE vol.1"
+	},
+	{
+		"title": "old questions",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2021-01-01",
+		"type": "original",
+		"format": "single",
+		"project": "RETROPROSPECTIVE vol.1"
+	},
+	{
+		"title": "...as a lost and lonely ghost",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2025-01-01",
+		"type": "original",
+		"format": "single"
+	},
+	{
+		"title": "running song",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2025-01-01",
+		"type": "original",
+		"format": "single"
+	},
+	{
+		"title": "girls",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2025-01-01",
+		"type": "original",
+		"format": "single"
+	},
+	{
+		"title": "elouise",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2024-01-01",
+		"type": "original",
+		"format": "single"
+	},
+	{
+		"title": "WE'LL BE DIVINE",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2023-01-01",
+		"type": "original",
+		"format": "single"
+	},
+	{
+		"title": "Lost in the world",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2023-01-01",
+		"type": "original",
+		"format": "single"
+	},
+	{
+		"title": "song for eating quiche",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2023-01-01",
+		"type": "original",
+		"format": "single"
+	},
+	{
+		"title": "wake up !",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer",
+		"date": "2019-01-01",
+		"type": "original",
+		"format": "single"
+	},
+	{
+		"title": "ghost (oddhorse rework)",
+		"artist": "oddhorse",
+		"role": "Producer, Mixing Engineer, Mastering Engineer, Performer, Remixer",
+		"date": "2024-01-01",
+		"type": "original",
+		"format": "single"
+	},
+	{
+		"title": "horselife",
+		"artist": "MANWOMAN!, oddhorse, w/lson",
+		"role": "Performer, Producer, Mixing Engineer, Mastering Engineer",
+		"date": "2022-01-01",
+		"type": "original",
+		"format": "single"
+	},
+	{
+		"title": "fish song",
+		"artist": "MANWOMAN!, oddhorse, w/lson",
+		"role": "Performer, Producer, Mixing Engineer, Mastering Engineer",
+		"date": "2024-01-01",
+		"type": "original",
+		"format": "single"
+	},
+	{
+		"title": "OUCH!",
+		"artist": "MANWOMAN!, oddhorse, w/lson",
+		"role": "Performer, Producer, Mixing Engineer, Mastering Engineer",
+		"date": "2024-01-01",
+		"type": "original",
+		"format": "single"
+	},
+	{
+		"title": "Déjà Vu",
+		"artist": "LAXXUO",
+		"role": "Producer",
+		"date": "2022-01-01",
+		"type": "original",
+		"format": "single"
+	}
+]

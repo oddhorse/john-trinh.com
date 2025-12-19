@@ -7,40 +7,40 @@ tags:
   - art
   - brand
   - silly + fun
-image: /artifacts/oddhorse-calendar-2024/front-of-calendar.jpg
+image: front-of-calendar.jpg
 ---
 
-![front of calendar](/artifacts/oddhorse-calendar-2024/front-of-calendar.jpg "front of calendar")
+![front of calendar](front-of-calendar.jpg)
 
-![back of calendar](/artifacts/oddhorse-calendar-2024/back-of-calendar.jpg "back of calendar")
+![back of calendar](back-of-calendar.jpg)
 
-![now that's an odd horse!](/artifacts/oddhorse-calendar-2024/now-that-s-an-odd-horse-.jpeg "now that's an odd horse!")
+![now that's an odd horse!](now-that-s-an-odd-horse-.jpeg)
 
-![january](/artifacts/oddhorse-calendar-2024/january.jpeg "january")
+![january](january.jpeg)
 
-![february](/artifacts/oddhorse-calendar-2024/february.jpeg "february")
+![february](february.jpeg)
 
-![march](/artifacts/oddhorse-calendar-2024/march.jpeg "march")
+![march](march.jpeg)
 
-![april](/artifacts/oddhorse-calendar-2024/april.jpeg "april")
+![april](april.jpeg)
 
-![may](/artifacts/oddhorse-calendar-2024/may.jpeg "may")
+![may](may.jpeg)
 
-![june](/artifacts/oddhorse-calendar-2024/june.jpeg "june")
+![june](june.jpeg)
 
-![july](/artifacts/oddhorse-calendar-2024/july.jpeg "july")
+![july](july.jpeg)
 
-![august](/artifacts/oddhorse-calendar-2024/august.jpeg "august")
+![august](august.jpeg)
 
-![september](/artifacts/oddhorse-calendar-2024/september.jpeg "september")
+![september](september.jpeg)
 
-![october](/artifacts/oddhorse-calendar-2024/october.jpeg "october")
+![october](october.jpeg)
 
-![november](/artifacts/oddhorse-calendar-2024/november.jpeg "november")
+![november](november.jpeg)
 
-![december](/artifacts/oddhorse-calendar-2024/december.jpeg "december")
+![december](december.jpeg)
 
-![now that's an odd horse!](/artifacts/oddhorse-calendar-2024/now-that-s-an-odd-horse--2.jpg "now that's an odd horse!")
+![now that's an odd horse!](now-that-s-an-odd-horse--2.jpg)
 
 a perversion of horse calendars for horse girl types. odd horses, if you will! made as merch for oddhorse; sold in limited run at printed matter in nyc; displayed in nyu gallery night in late 2024.
 

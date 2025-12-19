@@ -7,15 +7,15 @@ tags:
   - tech
   - art
   - screensaver
-image: /artifacts/shattered-screensaver/screenshot.png
+image: screenshot.png
 ---
 
 <video controls width="100%" loop>
-  <source src="/artifacts/shattered-screensaver/demo-video.mov" type="video/quicktime">
+  <source src="demo-video.mov" type="video/quicktime">
   Your browser does not support the video tag.
 </video>
 
-![screenshot](/artifacts/shattered-screensaver/screenshot.png)
+![screenshot](screenshot.png)
 
 i'm a big fan of the [deco screensaver from the ancient xscreensaver collection](https://www.youtube.com/watch?v=kfdDTv07Nhw), but always wished it could be segmented into parts that aren't rectangles. so i made it!
 

@@ -1,0 +1,51 @@
+{% if isDev or gitInfo.branch == "beta" or draft %}
+
+        <style>
+                .dev-hud {
+                        position: sticky;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        z-index: 1000;
+                        margin: 0;
+                }
+
+                .dev-hud p {
+                        margin: 0;
+                        padding: 0.5rem;
+                        text-align: center;
+                }
+
+                #dev-notice {
+                        background: #ffeb3b;
+                        color: #000;
+                }
+
+                #beta-notice {
+                        background: #ff9800;
+                        color: #000;
+                }
+
+                #draft-notice {
+                        background: #c6c6c6ff;
+                        color: #000;
+                }
+
+                #beta-notice a {
+                        color: #000;
+                        text-decoration: underline;
+                }
+        </style>
+
+        <aside class="dev-hud">
+                {% if isDev %}
+                        <p id="dev-notice">dev server running</p>
+                {% elif gitInfo.branch == 'beta' %}
+                        <p id="beta-notice">beta preview @ <a>beta.john-trinh.com</a>. <a href="https://john-trinh.com" target="_blank">click to visit the current version!</a>
+                        </p>
+                {% endif %}
+                {% if draft %}
+                        <p id="draft-notice">draft page! this won't be shown in production</p>
+                {% endif %}
+        </aside>
+{% endif %}

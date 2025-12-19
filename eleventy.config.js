@@ -1,5 +1,9 @@
 import markdownIt from "markdown-it";
 import implicitFigures from "markdown-it-implicit-figures";
+import markdownItVideo from "@vrcd-community/markdown-it-video";
+import artifactPathTransform from "./lib/artifact-path-transform.js";
+import imageOptimizeTransform from "./lib/image-optimize-transform.js";
+import { thumbnailImg, responsiveImg } from "./lib/image-shortcodes.js";
 
 // get git info
 import simpleGit from "simple-git";
@@ -22,6 +26,12 @@ export default async function (eleventyConfig) {
 
 	// current year for copyright footer
 	eleventyConfig.addGlobalData("year", new Date().getFullYear());
+
+	// dev mode?
+	eleventyConfig.addGlobalData(
+		"isDev",
+		process.env.ELEVENTY_RUN_MODE === "serve",
+	);
 
 	// source dir
 	eleventyConfig.setInputDirectory("site");
@@ -47,8 +57,36 @@ export default async function (eleventyConfig) {
 	};
 	eleventyConfig.setLibrary(
 		"md",
-		markdownIt(options).use(implicitFigures, {
-			figcaption: true,
-		}),
+		markdownIt(options)
+			.use(implicitFigures, {
+				figcaption: true,
+			})
+			.use(markdownItVideo, {
+				youtube: { width: 560, height: 315 },
+				vimeo: { width: 560, height: 315 },
+			}),
 	);
+
+	// Add transform for artifact relative paths
+	eleventyConfig.addTransform("artifactPaths", artifactPathTransform);
+
+	// Add transform for automatic image optimization
+	// Runs AFTER artifactPaths so paths are already absolute
+	eleventyConfig.addTransform("optimizeImages", imageOptimizeTransform);
+
+	// Add image optimization shortcodes
+	eleventyConfig.addAsyncShortcode("thumbnailImg", thumbnailImg);
+	eleventyConfig.addAsyncShortcode("responsiveImg", responsiveImg);
+
+	// Filter out draft content in production
+	eleventyConfig.addCollection("artifacts", (collectionApi) => {
+		const isDev = process.env.ELEVENTY_RUN_MODE === "serve";
+
+		return collectionApi
+			.getFilteredByGlob("site/artifacts/*/index.md")
+			.filter((item) => {
+				// Show drafts in dev mode, hide in production
+				return isDev || !item.data.draft;
+			});
+	});
 }

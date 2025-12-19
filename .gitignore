@@ -32,3 +32,6 @@ build/
 
 # TypeScript cache
 *.tsbuildinfo
+
+# SHHHHHHH
+CLAUDE.md
