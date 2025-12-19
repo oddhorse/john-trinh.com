@@ -23,12 +23,14 @@ categories:
 
 <h1>{{ category.title }}</h1>
 
+<!--
 <nav>
   <a href="/">all</a>
   <a href="/tech/">tech</a>
   <a href="/art/">art</a>
   <a href="/brand/">brand</a>
 </nav>
+-->
 
 <ul>
   {% for artifact in collections.artifacts | reverse %}
@@ -39,7 +41,8 @@ categories:
       .includes(category.filter) %}
       <li>
         {% if artifact.data.image %}
-          {% thumbnailImg artifact.data.image, artifact.data.title %}
+          {% thumbnailImg artifact.data.image,
+          artifact.data.title %}
         {% endif %}
         <a href="{{ artifact.url }}">{{ artifact.data.title }}</a>
         {% if artifact.data.draft %}
