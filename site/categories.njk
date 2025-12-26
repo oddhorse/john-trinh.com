@@ -21,16 +21,19 @@ categories:
     permalink: "/brand/"
 ---
 
+{% if category.title == "" %}
+<h1>john trinh</h1>
+<p class="tagline">artist-technologist building infrastructure for creative concepts</p>
+{% else %}
 <h1>{{ category.title }}</h1>
+{% endif %}
 
-<!--
 <nav>
   <a href="/">all</a>
   <a href="/tech/">tech</a>
   <a href="/art/">art</a>
   <a href="/brand/">brand</a>
 </nav>
--->
 
 <ul>
   {% for artifact in collections.artifacts | reverse %}

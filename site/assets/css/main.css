@@ -287,6 +287,36 @@ footer svg {
 }
 
 /* ============================================
+   HOMEPAGE & CATEGORY PAGES
+   Intro text and category navigation
+   ============================================ */
+
+/* Tagline under main heading on homepage */
+.tagline {
+	font-size: var(--text-m);
+	color: var(--color-muted);
+	margin-bottom: var(--space-m);
+}
+
+/* Category filter navigation */
+main > nav {
+	margin: var(--space-m) 0;
+	padding-bottom: var(--space-m);
+	border-bottom: 1px solid var(--color-surface);
+}
+
+main > nav a {
+	margin-right: var(--space-s);
+	padding: var(--space-xs) var(--space-s);
+	border-radius: 4px;
+	transition: background 0.15s ease;
+}
+
+main > nav a:hover {
+	background: var(--color-surface);
+}
+
+/* ============================================
    ARTIFACT LISTINGS
    Grid of portfolio items
    ============================================ */
