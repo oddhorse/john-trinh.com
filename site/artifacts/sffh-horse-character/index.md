@@ -16,3 +16,7 @@ draft: true
 HORSE CHARACTER MADE FOR SO FAR FROM HOME. MADE IN BLENDER, ALL FROM SCRATCH. ANIMATION CYCLES HAND-PROGRAMMED, EXCEPT FOR THE HOBO BUNDLE BOUNCING WITH GRAVITY, WHICH IS SIMULATED
 
 TODO: must put all the animation videos in!
+
+## Part of Campaign
+
+This character was created for the [So far from home visual campaign](/artifacts/sffh-campaign/) and appears in the [album cover](/artifacts/sffh-album-cover/), promotional videos, and other campaign materials.

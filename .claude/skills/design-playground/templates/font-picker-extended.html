@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Picker Extended — Design Playground</title>
+
+    <!--
+    ============================================
+    EXTENDED FONT PICKER PLAYGROUND
+    ============================================
+
+    Expanded version with Google Fonts integration.
+    Includes 25+ curated pairings from various foundries.
+
+    HOW TO USE:
+    1. Select a category (Technical, Artistic, Minimal, etc.)
+    2. Click through pairings in that category
+    3. Fonts load automatically from Google Fonts CDN
+    4. See how they look with your actual content
+    5. Click "Export Choice" when decided
+    6. Paste exported tokens back to Claude
+
+    FONT CATEGORIES:
+    - Technical: Mono/code-focused, developer aesthetic
+    - Artistic: Unique character, distinctive
+    - Minimal: Clean, understated, professional
+    - Classic: Timeless serif pairings
+    - Modern: Contemporary sans-serif
+    - Experimental: Unusual, boundary-pushing
+
+    ============================================
+    -->
+
+    <style>
+        /* ============================================
+           BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+            padding: 2rem;
+        }
+
+        /* ============================================
+           CONTROLS
+           Category selector + option buttons + export
+           ============================================ */
+        .controls {
+            position: sticky;
+            top: 0;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+
+        .controls h2 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .category-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .category-btn:hover {
+            border-color: #666;
+        }
+
+        .category-btn.active {
+            background: #f0f0f0;
+            border-color: #666;
+        }
+
+        .option-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .option-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            border-color: #666;
+        }
+
+        .option-btn.active {
+            background: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+        }
+
+        .export-btn {
+            padding: 0.75rem 1.5rem;
+            background: #0066cc;
+            color: white;
+            border: 2px solid #0066cc;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .export-btn:hover {
+            background: #0052a3;
+            border-color: #0052a3;
+        }
+
+        .font-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .loading {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background: #fff3cd;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        /* ============================================
+           PREVIEW CONTENT
+           Your actual portfolio content
+           ============================================ */
+        .preview {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+        }
+
+        .preview h1,
+        .preview h2,
+        .preview h3 {
+            font-family: var(--font-heading);
+            line-height: 1.2;
+        }
+
+        .preview p,
+        .preview li {
+            font-family: var(--font-body);
+        }
+
+        .preview code {
+            font-family: var(--font-mono);
+        }
+
+        .preview h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .preview .tagline {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            color: #666;
+        }
+
+        .preview h2 {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1rem;
+            font-weight: 600;
+        }
+
+        .preview h3 {
+            font-size: 1.3rem;
+            margin: 2rem 0 0.75rem;
+            font-weight: 600;
+        }
+
+        .preview p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .preview ul {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .preview li {
+            margin-bottom: 0.5rem;
+        }
+
+        .preview code {
+            background: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         CONTROLS SECTION
+         ============================================ -->
+    <div class="controls">
+        <h2>Choose Your Font Pairing</h2>
+
+        <!-- Category Selector -->
+        <div class="category-selector" id="categories">
+            <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Option Buttons (changes based on category) -->
+        <div class="option-buttons" id="options">
+            <!-- Populated by JavaScript -->
+        </div>
+
+        <button class="export-btn" onclick="exportChoice()">📋 Export Choice</button>
+
+        <div class="loading" id="loading">Loading fonts...</div>
+
+        <div class="font-info" id="font-info">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- ============================================
+         PREVIEW SECTION
+         ============================================ -->
+    <div class="preview" id="preview">
+        <h1>John Trinh</h1>
+        <p class="tagline">artist-technologist building infrastructure for creative concepts</p>
+
+        <h2>Performance Technology</h2>
+        <p>Custom MIDI controllers, Max for Live devices, and live performance systems that bridge the gap between creative vision and technical implementation.</p>
+
+        <h3>Recent Projects</h3>
+        <ul>
+            <li>Glove MIDI Controller — wearable performance interface with BLE connectivity</li>
+            <li>GRUBBLER — Max for Live ring modulator with automatic gain compensation</li>
+            <li>TouchDesigner visual systems for live performance</li>
+        </ul>
+
+        <h2>About</h2>
+        <p>Junior at NYU's Clive Davis Institute studying music production and creative technology. Work spans music production, software development, hardware design, and visual arts. If I don't know how to do something today, I will by next week.</p>
+
+        <p>Technical depth includes 5+ years in Ableton Live, 3000+ hours in Blender, and experience across Max/MSP, JavaScript, C++, and Python. Professional work includes mixing/mastering services and custom controller builds for other artists.</p>
+
+        <h3>Technical Stack</h3>
+        <p>Example code reference: <code>eleventyConfig.addTransform()</code></p>
+    </div>
+
+    <!-- ============================================
+         JAVASCRIPT
+         Font library + dynamic loading + export
+         ============================================ -->
+    <script>
+        /**
+         * FONT LIBRARY
+         *
+         * Curated pairings organized by aesthetic category.
+         * Each pairing includes Google Fonts API URL for loading.
+         */
+        const fontLibrary = {
+            technical: [
+                {
+                    name: "Space Mono + Inter",
+                    heading: "Space Mono",
+                    body: "Inter",
+                    mono: "Space Mono",
+                    description: "Geometric monospace + modern sans. Clean, technical, highly readable.",
+                    url: "https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;600&display=swap"
+                },
+                {
+                    name: "IBM Plex Mono + IBM Plex Sans",
+                    heading: "IBM Plex Mono",
+                    body: "IBM Plex Sans",
+                    mono: "IBM Plex Mono",
+                    description: "IBM's design system. Professional, technical, cohesive family.",
+                    url: "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap"
+                },
+                {
+                    name: "JetBrains Mono + Work Sans",
+                    heading: "JetBrains Mono",
+                    body: "Work Sans",
+                    mono: "JetBrains Mono",
+                    description: "Code editor font + geometric sans. Developer aesthetic.",
+                    url: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Work+Sans:wght@400;600&display=swap"
+                },
+                {
+                    name: "Roboto Mono + Roboto",
+                    heading: "Roboto Mono",
+                    body: "Roboto",
+                    mono: "Roboto Mono",
+                    description: "Google's mono + sans. Familiar, reliable, very readable.",
+                    url: "https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;600&display=swap"
+                },
+                {
+                    name: "Courier Prime + System Sans",
+                    heading: "Courier Prime",
+                    body: "system-ui",
+                    mono: "Courier Prime",
+                    description: "Refined typewriter font + native system. Distinctive but fast.",
+                    url: "https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap"
+                }
+            ],
+
+            artistic: [
+                {
+                    name: "Playfair Display + Source Sans Pro",
+                    heading: "Playfair Display",
+                    body: "Source Sans Pro",
+                    mono: "Source Code Pro",
+                    description: "Elegant high-contrast serif + clean sans. Artistic, refined.",
+                    url: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@400;600&family=Source+Code+Pro&display=swap"
+                },
+                {
+                    name: "Crimson Text + Lato",
+                    heading: "Crimson Text",
+                    body: "Lato",
+                    mono: "Courier Prime",
+                    description: "Literary serif + warm sans. Bookish, approachable.",
+                    url: "https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&family=Lato:wght@400;700&family=Courier+Prime&display=swap"
+                },
+                {
+                    name: "Merriweather + Open Sans",
+                    heading: "Merriweather",
+                    body: "Open Sans",
+                    mono: "Inconsolata",
+                    description: "Readable serif + friendly sans. Warm, inviting, distinctive.",
+                    url: "https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&family=Inconsolata&display=swap"
+                },
+                {
+                    name: "Spectral + Karla",
+                    heading: "Spectral",
+                    body: "Karla",
+                    mono: "Fira Code",
+                    description: "Elegant serif + quirky sans. Artistic contrast.",
+                    url: "https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&family=Karla:wght@400;700&family=Fira+Code&display=swap"
+                }
+            ],
+
+            minimal: [
+                {
+                    name: "Inter Everything",
+                    heading: "Inter",
+                    body: "Inter",
+                    mono: "JetBrains Mono",
+                    description: "Inter throughout. Modern, minimal, highly optimized for screens.",
+                    url: "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap"
+                },
+                {
+                    name: "Work Sans + Work Sans",
+                    heading: "Work Sans",
+                    body: "Work Sans",
+                    mono: "Roboto Mono",
+                    description: "Geometric sans throughout. Clean, professional, understated.",
+                    url: "https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&family=Roboto+Mono&display=swap"
+                },
+                {
+                    name: "DM Sans + DM Sans",
+                    heading: "DM Sans",
+                    body: "DM Sans",
+                    mono: "DM Mono",
+                    description: "Matching family. Minimal, cohesive, professional.",
+                    url: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono&display=swap"
+                },
+                {
+                    name: "System Fonts",
+                    heading: "system-ui",
+                    body: "system-ui",
+                    mono: "ui-monospace",
+                    description: "Native system fonts. Fastest loading, familiar, accessible.",
+                    url: null
+                }
+            ],
+
+            classic: [
+                {
+                    name: "Cormorant Garamond + Lato",
+                    heading: "Cormorant Garamond",
+                    body: "Lato",
+                    mono: "Inconsolata",
+                    description: "Classic Garamond revival + modern sans. Timeless elegance.",
+                    url: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Lato:wght@400;700&family=Inconsolata&display=swap"
+                },
+                {
+                    name: "Libre Baskerville + Source Sans Pro",
+                    heading: "Libre Baskerville",
+                    body: "Source Sans Pro",
+                    mono: "Source Code Pro",
+                    description: "Baskerville serif + readable sans. Traditional, authoritative.",
+                    url: "https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+Pro:wght@400;600&family=Source+Code+Pro&display=swap"
+                },
+                {
+                    name: "Lora + Nunito Sans",
+                    heading: "Lora",
+                    body: "Nunito Sans",
+                    mono: "Inconsolata",
+                    description: "Brushed serif + rounded sans. Warm, friendly classic.",
+                    url: "https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito+Sans:wght@400;700&family=Inconsolata&display=swap"
+                }
+            ],
+
+            modern: [
+                {
+                    name: "Outfit + Outfit",
+                    heading: "Outfit",
+                    body: "Outfit",
+                    mono: "Fira Code",
+                    description: "Contemporary geometric sans. Bold, modern, confident.",
+                    url: "https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Fira+Code&display=swap"
+                },
+                {
+                    name: "Manrope + Manrope",
+                    heading: "Manrope",
+                    body: "Manrope",
+                    mono: "JetBrains Mono",
+                    description: "Modern geometric with personality. Clean but distinctive.",
+                    url: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=JetBrains+Mono&display=swap"
+                },
+                {
+                    name: "Plus Jakarta Sans",
+                    heading: "Plus Jakarta Sans",
+                    body: "Plus Jakarta Sans",
+                    mono: "Space Mono",
+                    description: "Geometric sans with warmth. Modern, friendly, approachable.",
+                    url: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Space+Mono&display=swap"
+                }
+            ],
+
+            experimental: [
+                {
+                    name: "Space Grotesk + Karla",
+                    heading: "Space Grotesk",
+                    body: "Karla",
+                    mono: "Space Mono",
+                    description: "Geometric sans heading + quirky rounded body. Modern, friendly, distinctive.",
+                    url: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Karla:wght@400;600&family=Space+Mono&display=swap"
+                },
+                {
+                    name: "Inconsolata + Georgia",
+                    heading: "Inconsolata",
+                    body: "Georgia",
+                    mono: "Inconsolata",
+                    description: "Mono heading + serif body. Inverted hierarchy, unexpected.",
+                    url: "https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap"
+                },
+                {
+                    name: "Archivo Black + Archivo",
+                    heading: "Archivo Black",
+                    body: "Archivo",
+                    mono: "Fira Code",
+                    description: "Ultra-bold display + regular sans. High impact, modern.",
+                    url: "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600&family=Fira+Code&display=swap"
+                },
+                {
+                    name: "Space Grotesk + Space Mono",
+                    heading: "Space Grotesk",
+                    body: "Space Mono",
+                    mono: "Space Mono",
+                    description: "Geometric sans + mono body. Tech-forward, distinctive.",
+                    url: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono:wght@400;600&display=swap"
+                }
+            ]
+        };
+
+        // Track current state
+        let currentCategory = 'technical';
+        let currentOption = 0;
+
+        /**
+         * Initialize the playground
+         * Sets up categories and loads first option
+         */
+        function init() {
+            renderCategories();
+            renderOptions(currentCategory);
+            applyOption(currentCategory, 0);
+        }
+
+        /**
+         * Render category buttons
+         */
+        function renderCategories() {
+            const container = document.getElementById('categories');
+            const categories = Object.keys(fontLibrary);
+
+            container.innerHTML = categories.map(cat => `
+                <button class="category-btn ${cat === currentCategory ? 'active' : ''}"
+                        onclick="switchCategory('${cat}')">
+                    ${cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </button>
+            `).join('');
+        }
+
+        /**
+         * Render option buttons for a category
+         */
+        function renderOptions(category) {
+            const container = document.getElementById('options');
+            const options = fontLibrary[category];
+
+            container.innerHTML = options.map((opt, idx) => `
+                <button class="option-btn ${idx === currentOption ? 'active' : ''}"
+                        onclick="applyOption('${category}', ${idx})">
+                    ${opt.name}
+                </button>
+            `).join('');
+        }
+
+        /**
+         * Switch to a different category
+         */
+        function switchCategory(category) {
+            currentCategory = category;
+            currentOption = 0;
+            renderCategories();
+            renderOptions(category);
+            applyOption(category, 0);
+        }
+
+        /**
+         * Apply a font option to the preview
+         * Loads fonts from Google Fonts if needed
+         */
+        function applyOption(category, optionIdx) {
+            currentCategory = category;
+            currentOption = optionIdx;
+
+            const option = fontLibrary[category][optionIdx];
+            const preview = document.getElementById('preview');
+
+            // Show loading indicator
+            const loading = document.getElementById('loading');
+            loading.style.display = 'block';
+
+            // Load font if it has a Google Fonts URL
+            if (option.url) {
+                // Check if already loaded
+                const linkId = 'font-' + category + '-' + optionIdx;
+                if (!document.getElementById(linkId)) {
+                    const link = document.createElement('link');
+                    link.id = linkId;
+                    link.rel = 'stylesheet';
+                    link.href = option.url;
+                    link.onload = () => {
+                        loading.style.display = 'none';
+                    };
+                    document.head.appendChild(link);
+                } else {
+                    loading.style.display = 'none';
+                }
+            } else {
+                loading.style.display = 'none';
+            }
+
+            // Apply fonts to preview
+            preview.style.setProperty('--font-heading', option.heading);
+            preview.style.setProperty('--font-body', option.body);
+            preview.style.setProperty('--font-mono', option.mono);
+
+            // Update buttons
+            renderOptions(category);
+
+            // Update info
+            document.getElementById('font-info').innerHTML = `
+                <strong>${option.name}</strong><br>
+                ${option.description}<br>
+                <em>Heading: ${option.heading} • Body: ${option.body} • Mono: ${option.mono}</em>
+            `;
+        }
+
+        /**
+         * Export the currently selected font choice
+         */
+        function exportChoice() {
+            const option = fontLibrary[currentCategory][currentOption];
+
+            // Create design tokens
+            const tokens = {
+                category: currentCategory,
+                name: option.name,
+                fonts: {
+                    heading: option.heading,
+                    body: option.body,
+                    mono: option.mono
+                },
+                googleFontsUrl: option.url,
+                css: {
+                    heading: `--font-heading: '${option.heading}', ${option.heading.includes('system') ? 'sans-serif' : 'fallback'};`,
+                    body: `--font-body: '${option.body}', ${option.body.includes('system') ? 'sans-serif' : 'fallback'};`,
+                    mono: `--font-mono: '${option.mono}', monospace;`
+                }
+            };
+
+            const json = JSON.stringify(tokens, null, 2);
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(json).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                btn.style.background = '#00aa00';
+
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#0066cc';
+                }, 2000);
+
+                console.log('Exported design tokens:', tokens);
+            });
+        }
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>

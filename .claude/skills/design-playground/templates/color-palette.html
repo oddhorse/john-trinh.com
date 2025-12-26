@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Palette Picker — Design Playground</title>
+
+    <!--
+    ============================================
+    COLOR PALETTE PICKER PLAYGROUND
+    ============================================
+
+    Interactive tool for choosing color schemes.
+    Designed to work with Space Grotesk + Karla fonts.
+
+    HOW TO USE:
+    1. Select a palette category (Minimal, Bold, Dark, etc.)
+    2. Click through palette options
+    3. See colors applied to your actual content
+    4. Test contrast, readability, visual hierarchy
+    5. Click "Export Choice" when decided
+
+    COLOR PHILOSOPHY:
+    - Background: Canvas for content
+    - Text: High contrast for readability
+    - Accent: Calls attention, creates hierarchy
+    - Muted: Secondary text, metadata
+    - Surface: Cards, containers, separation
+
+    ============================================
+    -->
+
+    <!-- Load chosen fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Karla:wght@400;600&family=Space+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           BASE STYLES
+           Using chosen fonts: Space Grotesk + Karla
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Karla', system-ui, sans-serif;
+            line-height: 1.6;
+            background: #fafafa;
+            padding: 2rem;
+        }
+
+        /* ============================================
+           CONTROLS
+           ============================================ */
+        .controls {
+            position: sticky;
+            top: 0;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            z-index: 100;
+            font-family: 'Karla', sans-serif;
+        }
+
+        .controls h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: #1a1a1a;
+        }
+
+        .category-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: 'Karla', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .category-btn:hover {
+            border-color: #666;
+        }
+
+        .category-btn.active {
+            background: #f0f0f0;
+            border-color: #666;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .palette-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .palette-card:hover {
+            border-color: #666;
+            transform: translateY(-2px);
+        }
+
+        .palette-card.active {
+            border-color: #1a1a1a;
+            border-width: 3px;
+        }
+
+        .palette-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .palette-swatches {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .swatch {
+            height: 30px;
+            border-radius: 3px;
+        }
+
+        .palette-description {
+            font-size: 0.75rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .export-btn {
+            padding: 0.75rem 1.5rem;
+            background: #0066cc;
+            color: white;
+            border: 2px solid #0066cc;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: 'Karla', sans-serif;
+        }
+
+        .export-btn:hover {
+            background: #0052a3;
+            border-color: #0052a3;
+        }
+
+        .color-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* ============================================
+           PREVIEW CONTENT
+           Shows actual portfolio with selected palette
+           ============================================ */
+        .preview {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--color-background);
+            color: var(--color-text);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+        }
+
+        .preview h1,
+        .preview h2,
+        .preview h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.2;
+            color: var(--color-text);
+        }
+
+        .preview p,
+        .preview li {
+            font-family: 'Karla', sans-serif;
+        }
+
+        .preview code {
+            font-family: 'Space Mono', monospace;
+        }
+
+        .preview h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .preview .tagline {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            color: var(--color-muted);
+        }
+
+        .preview h2 {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1rem;
+            font-weight: 600;
+        }
+
+        .preview h3 {
+            font-size: 1.3rem;
+            margin: 2rem 0 0.75rem;
+            font-weight: 600;
+        }
+
+        .preview p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .preview ul {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .preview li {
+            margin-bottom: 0.5rem;
+        }
+
+        .preview code {
+            background: var(--color-surface);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .preview a {
+            color: var(--color-accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--color-accent);
+        }
+
+        .preview a:hover {
+            border-bottom: 2px solid var(--color-accent);
+        }
+
+        .card-example {
+            background: var(--color-surface);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+        }
+
+        .meta {
+            color: var(--color-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         CONTROLS SECTION
+         ============================================ -->
+    <div class="controls">
+        <h2>Choose Your Color Palette</h2>
+
+        <!-- Category Selector -->
+        <div class="category-selector" id="categories">
+            <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Palette Grid -->
+        <div class="palette-grid" id="palettes">
+            <!-- Populated by JavaScript -->
+        </div>
+
+        <button class="export-btn" onclick="exportChoice()">📋 Export Choice</button>
+
+        <div class="color-info" id="color-info">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- ============================================
+         PREVIEW SECTION
+         ============================================ -->
+    <div class="preview" id="preview">
+        <h1>John Trinh</h1>
+        <p class="tagline">artist-technologist building infrastructure for creative concepts</p>
+
+        <h2>Performance Technology</h2>
+        <p>Custom MIDI controllers, Max for Live devices, and live performance systems that bridge the gap between creative vision and technical implementation.</p>
+
+        <div class="card-example">
+            <h3>Glove MIDI Controller</h3>
+            <p class="meta">feb 2025 • hardware • performance tool</p>
+            <p>Wearable performance interface with BLE connectivity. Built with ESP32 microcontroller, programmed in C++. Triggers MIDI notes and CC values via thumb-to-finger contact using conductive fabric.</p>
+            <p><a href="#">View project →</a></p>
+        </div>
+
+        <h2>About</h2>
+        <p>Junior at NYU's Clive Davis Institute studying music production and creative technology. Work spans music production, software development, hardware design, and visual arts.</p>
+
+        <p>Technical depth includes 5+ years in Ableton Live, 3000+ hours in Blender, and experience across Max/MSP, JavaScript, C++, and Python. Professional work includes mixing/mastering services and custom controller builds.</p>
+
+        <h3>Technical Stack</h3>
+        <p>Example code reference: <code>eleventyConfig.addTransform()</code></p>
+    </div>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        /**
+         * COLOR PALETTE LIBRARY
+         *
+         * Organized by aesthetic/mood.
+         * Each palette defines 5 core color variables.
+         */
+        const paletteLibrary = {
+            minimal: [
+                {
+                    name: "Pure Monochrome",
+                    colors: {
+                        background: "#ffffff",
+                        text: "#1a1a1a",
+                        accent: "#0066cc",
+                        muted: "#666666",
+                        surface: "#f5f5f5"
+                    },
+                    description: "Classic black on white. High contrast, maximum readability, timeless."
+                },
+                {
+                    name: "Soft Mono",
+                    colors: {
+                        background: "#fafafa",
+                        text: "#2a2a2a",
+                        accent: "#0066cc",
+                        muted: "#6b6b6b",
+                        surface: "#f0f0f0"
+                    },
+                    description: "Slightly warmed neutrals. Easier on eyes, still very minimal."
+                },
+                {
+                    name: "Crisp Gray",
+                    colors: {
+                        background: "#f8f9fa",
+                        text: "#212529",
+                        accent: "#007bff",
+                        muted: "#6c757d",
+                        surface: "#e9ecef"
+                    },
+                    description: "Bootstrap-inspired grays. Professional, familiar, accessible."
+                },
+                {
+                    name: "Warm Minimal",
+                    colors: {
+                        background: "#fffef9",
+                        text: "#1a1614",
+                        accent: "#d97706",
+                        muted: "#78716c",
+                        surface: "#fafaf7"
+                    },
+                    description: "Warm off-white with amber accent. Friendly minimal."
+                }
+            ],
+
+            dark: [
+                {
+                    name: "Pure Dark",
+                    colors: {
+                        background: "#0a0a0a",
+                        text: "#f5f5f5",
+                        accent: "#3b82f6",
+                        muted: "#a3a3a3",
+                        surface: "#1a1a1a"
+                    },
+                    description: "True dark mode. High contrast, OLED-friendly."
+                },
+                {
+                    name: "Warm Dark",
+                    colors: {
+                        background: "#1a1614",
+                        text: "#fafaf7",
+                        accent: "#fbbf24",
+                        muted: "#a8a29e",
+                        surface: "#292524"
+                    },
+                    description: "Warm charcoal with amber. Cozy, less harsh than pure black."
+                },
+                {
+                    name: "Slate Dark",
+                    colors: {
+                        background: "#0f172a",
+                        text: "#f1f5f9",
+                        accent: "#38bdf8",
+                        muted: "#94a3b8",
+                        surface: "#1e293b"
+                    },
+                    description: "Cool slate with cyan accent. Technical, modern."
+                },
+                {
+                    name: "Midnight",
+                    colors: {
+                        background: "#09090b",
+                        text: "#fafafa",
+                        accent: "#a855f7",
+                        muted: "#a1a1aa",
+                        surface: "#18181b"
+                    },
+                    description: "Near-black with purple accent. Artistic, mysterious."
+                }
+            ],
+
+            bold: [
+                {
+                    name: "Hyper Pink",
+                    colors: {
+                        background: "#ffffff",
+                        text: "#0a0a0a",
+                        accent: "#ff0080",
+                        muted: "#666666",
+                        surface: "#fff0f7"
+                    },
+                    description: "Neon magenta. Eye-catching, electric, hyperpop energy."
+                },
+                {
+                    name: "Hot Pink + Cyan",
+                    colors: {
+                        background: "#fafafa",
+                        text: "#1a1a1a",
+                        accent: "#ff006e",
+                        muted: "#00d9ff",
+                        surface: "#fff0f9"
+                    },
+                    description: "Neon pink accent + cyan muted. Vaporwave vibes, maximum energy."
+                },
+                {
+                    name: "Electric Lime",
+                    colors: {
+                        background: "#ffffff",
+                        text: "#0a0a0a",
+                        accent: "#00ff41",
+                        muted: "#666666",
+                        surface: "#f0fff4"
+                    },
+                    description: "True neon green. Matrix aesthetic, cyberpunk, radioactive."
+                },
+                {
+                    name: "Laser Purple",
+                    colors: {
+                        background: "#ffffff",
+                        text: "#0a0a0a",
+                        accent: "#b000ff",
+                        muted: "#666666",
+                        surface: "#f9f0ff"
+                    },
+                    description: "Neon purple. Synthetic, futuristic, rave energy."
+                }
+            ],
+
+            artistic: [
+                {
+                    name: "Aubergine",
+                    colors: {
+                        background: "#faf5ff",
+                        text: "#2e1065",
+                        accent: "#7c3aed",
+                        muted: "#7e22ce",
+                        surface: "#f3e8ff"
+                    },
+                    description: "Purple tones throughout. Artistic, luxurious, distinctive."
+                },
+                {
+                    name: "Forest",
+                    colors: {
+                        background: "#f7fee7",
+                        text: "#1a2e05",
+                        accent: "#65a30d",
+                        muted: "#4d7c0f",
+                        surface: "#ecfccb"
+                    },
+                    description: "Earthy greens. Natural, calming, grounded."
+                },
+                {
+                    name: "Ocean",
+                    colors: {
+                        background: "#f0f9ff",
+                        text: "#0c4a6e",
+                        accent: "#0284c7",
+                        muted: "#0369a1",
+                        surface: "#e0f2fe"
+                    },
+                    description: "Deep blues. Professional but distinctive, aquatic."
+                },
+                {
+                    name: "Terracotta",
+                    colors: {
+                        background: "#fff7ed",
+                        text: "#431407",
+                        accent: "#c2410c",
+                        muted: "#9a3412",
+                        surface: "#ffedd5"
+                    },
+                    description: "Warm earth tones. Organic, warm, handcrafted feel."
+                }
+            ],
+
+            subtle: [
+                {
+                    name: "Ghost",
+                    colors: {
+                        background: "#fafafa",
+                        text: "#404040",
+                        accent: "#737373",
+                        muted: "#a3a3a3",
+                        surface: "#f5f5f5"
+                    },
+                    description: "Almost no color. Ultra-minimal, content-first."
+                },
+                {
+                    name: "Whisper Blue",
+                    colors: {
+                        background: "#fafbfc",
+                        text: "#3b4252",
+                        accent: "#5e81ac",
+                        muted: "#7b88a1",
+                        surface: "#eceff4"
+                    },
+                    description: "Very subtle blue tones. Calm, understated, Nordic."
+                },
+                {
+                    name: "Sage",
+                    colors: {
+                        background: "#fafaf9",
+                        text: "#3c3c39",
+                        accent: "#84a98c",
+                        muted: "#8a9085",
+                        surface: "#f4f4f3"
+                    },
+                    description: "Muted green-gray. Natural, soft, refined."
+                },
+                {
+                    name: "Dust",
+                    colors: {
+                        background: "#faf9f7",
+                        text: "#3d3835",
+                        accent: "#b89968",
+                        muted: "#9b8b7e",
+                        surface: "#f5f4f2"
+                    },
+                    description: "Warm neutrals with gold. Sophisticated, earthy."
+                }
+            ]
+        };
+
+        // Track current state
+        let currentCategory = 'minimal';
+        let currentPalette = 0;
+
+        /**
+         * Initialize the playground
+         */
+        function init() {
+            renderCategories();
+            renderPalettes(currentCategory);
+            applyPalette(currentCategory, 0);
+        }
+
+        /**
+         * Render category buttons
+         */
+        function renderCategories() {
+            const container = document.getElementById('categories');
+            const categories = Object.keys(paletteLibrary);
+
+            container.innerHTML = categories.map(cat => `
+                <button class="category-btn ${cat === currentCategory ? 'active' : ''}"
+                        onclick="switchCategory('${cat}')">
+                    ${cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </button>
+            `).join('');
+        }
+
+        /**
+         * Render palette cards for a category
+         */
+        function renderPalettes(category) {
+            const container = document.getElementById('palettes');
+            const palettes = paletteLibrary[category];
+
+            container.innerHTML = palettes.map((palette, idx) => `
+                <div class="palette-card ${idx === currentPalette ? 'active' : ''}"
+                     onclick="applyPalette('${category}', ${idx})">
+                    <div class="palette-name">${palette.name}</div>
+                    <div class="palette-swatches">
+                        <div class="swatch" style="background: ${palette.colors.background}; border: 1px solid #e0e0e0;"></div>
+                        <div class="swatch" style="background: ${palette.colors.text};"></div>
+                        <div class="swatch" style="background: ${palette.colors.accent};"></div>
+                        <div class="swatch" style="background: ${palette.colors.muted};"></div>
+                        <div class="swatch" style="background: ${palette.colors.surface}; border: 1px solid #e0e0e0;"></div>
+                    </div>
+                    <div class="palette-description">${palette.description}</div>
+                </div>
+            `).join('');
+        }
+
+        /**
+         * Switch category
+         */
+        function switchCategory(category) {
+            currentCategory = category;
+            currentPalette = 0;
+            renderCategories();
+            renderPalettes(category);
+            applyPalette(category, 0);
+        }
+
+        /**
+         * Apply a palette to the preview
+         */
+        function applyPalette(category, paletteIdx) {
+            currentCategory = category;
+            currentPalette = paletteIdx;
+
+            const palette = paletteLibrary[category][paletteIdx];
+            const preview = document.getElementById('preview');
+
+            // Apply CSS custom properties
+            preview.style.setProperty('--color-background', palette.colors.background);
+            preview.style.setProperty('--color-text', palette.colors.text);
+            preview.style.setProperty('--color-accent', palette.colors.accent);
+            preview.style.setProperty('--color-muted', palette.colors.muted);
+            preview.style.setProperty('--color-surface', palette.colors.surface);
+
+            // Update active state
+            renderPalettes(category);
+
+            // Update info
+            document.getElementById('color-info').innerHTML = `
+                <strong>${palette.name}</strong><br>
+                ${palette.description}<br>
+                <div style="margin-top: 0.5rem; font-family: 'Space Mono', monospace; font-size: 0.8rem;">
+                    bg: ${palette.colors.background} •
+                    text: ${palette.colors.text} •
+                    accent: ${palette.colors.accent}
+                </div>
+            `;
+        }
+
+        /**
+         * Export the currently selected palette
+         */
+        function exportChoice() {
+            const palette = paletteLibrary[currentCategory][currentPalette];
+
+            const tokens = {
+                category: currentCategory,
+                name: palette.name,
+                colors: palette.colors,
+                css: {
+                    background: `--color-background: ${palette.colors.background};`,
+                    text: `--color-text: ${palette.colors.text};`,
+                    accent: `--color-accent: ${palette.colors.accent};`,
+                    muted: `--color-muted: ${palette.colors.muted};`,
+                    surface: `--color-surface: ${palette.colors.surface};`
+                }
+            };
+
+            const json = JSON.stringify(tokens, null, 2);
+
+            navigator.clipboard.writeText(json).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                btn.style.background = '#00aa00';
+
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#0066cc';
+                }, 2000);
+
+                console.log('Exported color tokens:', tokens);
+            });
+        }
+
+        // Initialize
+        init();
+    </script>
+</body>
+</html>

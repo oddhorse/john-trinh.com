@@ -3,11 +3,11 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"start": "npx @11ty/eleventy --serve",
+		"start": "npm run clean && npx @11ty/eleventy --serve",
 		"watch": "npx @11ty/eleventy --watch",
-		"serve": "npx @11ty/eleventy --serve",
+		"serve": "npm run clean && npx @11ty/eleventy --serve",
 		"bench": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
-		"build": "npx @11ty/eleventy",
+		"build": "npm run clean && npx @11ty/eleventy",
 		"clean": "del-cli dist",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},

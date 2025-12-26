@@ -7,6 +7,7 @@ tags:
   - tech
   - marketing
   - brand
+  - art
 image: more-designs-.png
 ---
 
