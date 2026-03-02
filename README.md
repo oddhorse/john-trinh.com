@@ -26,7 +26,10 @@ portfolio. artist project at [odd.horse](https://odd.horse)
 [ ] have claude inventory artifacts and determine what needs what (process videos, any artwork at all, etc)
 [ ] figure out more of a standard for the subtitle lines
 [ ] provide site.webmanifest
+[ ] selfie gallery
 
 ### portfolio pieces missing
 
 [ ] fish song visualizer
+[ ] put zoe august website on portfolio
+[ ] put dotfiles repo on portfolio
