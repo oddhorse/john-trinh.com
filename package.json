@@ -3,7 +3,8 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"start": "npm run clean && npx @11ty/eleventy --serve",
+		"start": "npm run clean && sh -c \"npm run dev:ts & npx @11ty/eleventy --serve\"",
+		"dev:ts": "esbuild site/ts/museum.ts --bundle --outdir=dist/js --format=esm --sourcemap --watch",
 		"watch": "npx @11ty/eleventy --watch",
 		"serve": "npm run clean && npx @11ty/eleventy --serve",
 		"bench": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
@@ -31,6 +32,9 @@
 	},
 	"devDependencies": {
 		"@11ty/eleventy-img": "^6.0.4",
-		"cheerio": "^1.1.2"
+		"cheerio": "^1.1.2",
+		"esbuild": "^0.19.0",
+		"typescript": "^5.3.0",
+		"@types/three": "^0.183.0"
 	}
 }
