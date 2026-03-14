@@ -34,26 +34,28 @@ categories:
 	<a href="/brand/">brand</a>
 </nav>
 
-<ul>
-	{% for artifact in collections.artifacts | reverse %}
-		{% if not category
-			.filter or artifact
-			.data
-			.tags
-			.includes(category.filter) %}
-			<li>
-				{% if artifact.data.image %}
-					{% thumbnailImg artifact.data.image,
-					artifact.data.title %}
-				{% endif %}
-				<a href="{{ artifact.url }}">{{ artifact.data.title }}</a>
-				{% if artifact.data.draft %}
-					<span style="color: red;"> (DRAFT) </span>
-				{% endif %}
-				{% if artifact.data.subtitle %}
-					<span> — {{ artifact.data.subtitle }}</span>
-				{% endif %}
-			</li>
-		{% endif %}
-	{% endfor %}
-</ul>
+<main>
+	<ul>
+		{% for artifact in collections.artifacts | reverse %}
+			{% if not category
+				.filter or artifact
+				.data
+				.tags
+				.includes(category.filter) %}
+				<li>
+					{% if artifact.data.image %}
+						{% thumbnailImg artifact.data.image,
+						artifact.data.title %}
+					{% endif %}
+					<a href="{{ artifact.url }}">{{ artifact.data.title }}</a>
+					{% if artifact.data.draft %}
+						<span style="color: red;"> (DRAFT) </span>
+					{% endif %}
+					{% if artifact.data.subtitle %}
+						<span> — {{ artifact.data.subtitle }}</span>
+					{% endif %}
+				</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</main>
