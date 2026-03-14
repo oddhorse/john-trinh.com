@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Personal portfolio site for John Trinh (musician, audio engineer, developer, designer). Built with Eleventy 3.1.2 static site generator with advanced image optimization and responsive design features.
 
 **Tech Stack:**
+
 - Eleventy 3.1.2 (static site generator)
 - Nunjucks templating
 - markdown-it with plugins (implicit-figures, video embeds)
@@ -28,6 +29,7 @@ npm run watch           # Build on file changes (no dev server)
 ## Architecture
 
 ### Directory Structure
+
 ```
 /
 ├── lib/                        # Custom Eleventy utilities
@@ -88,6 +90,7 @@ npm run watch           # Build on file changes (no dev server)
 ```
 
 ### Template Hierarchy
+
 ```
 base.njk (root HTML wrapper)
 ├── head.njk (meta tags, SEO, Open Graph, favicons)
@@ -100,6 +103,7 @@ base.njk (root HTML wrapper)
 ```
 
 **Layout Application:**
+
 - All pages use `base.njk` as default layout (set globally in eleventy.config.js)
 - Artifacts use `artifact.njk` layout which extends `base.njk`
 - Content is injected via `{{ content | safe }}`
@@ -107,6 +111,7 @@ base.njk (root HTML wrapper)
 ### Collections
 
 **artifacts collection:**
+
 - Auto-generated from all `index.md` files in `/site/artifacts/*/` subdirectories
 - Configuration in `/site/artifacts/artifacts.json`
 - All artifacts must be tagged with `["artifacts", "portfolio"]`
@@ -125,6 +130,7 @@ Available in all templates:
 The Eleventy build runs in four phases:
 
 ### 1. Data Phase
+
 ```
 Load credits.json
 Run eleventyComputed.js → Expand image paths in artifact front matter
@@ -134,6 +140,7 @@ Generate artifacts collection (filter drafts in production)
 ```
 
 ### 2. Template Phase
+
 ```
 Process .md files through markdown-it:
   → markdown-it-implicit-figures (auto-wrap images in <figure> with <figcaption>)
@@ -144,15 +151,18 @@ Insert includes (head, header, footer, dev-hud)
 ```
 
 ### 3. Transform Phase (HTML Post-Processing)
+
 Transforms run in order on final HTML:
 
 **a) artifactPathTransform** (`lib/artifact-path-transform.js`)
+
 - Finds relative `src` and `href` attributes in artifact pages
 - Expands to absolute paths: `image.png` → `/artifacts/[name]/image.png`
 - Works with images, videos, links, any asset references
 - Only affects pages matching `/artifacts/*/` URL pattern
 
 **b) imageOptimizeTransform** (`lib/image-optimize-transform.js`)
+
 - Parses HTML with Cheerio
 - Finds all `<img>` tags in artifact pages (skips `_template`)
 - Skips GIFs (preserves animation) and images with `data-no-optimize` attribute
@@ -162,6 +172,7 @@ Transforms run in order on final HTML:
 - Supports custom `data-sizes` attribute for responsive sizes
 
 ### 4. Output Phase
+
 ```
 Write HTML files to dist/
 Copy passthrough files (artifacts/*, assets/*)
@@ -175,12 +186,14 @@ The project has a **two-tier image optimization system**:
 ### Tier 1: Automatic Transform (For Markdown Images)
 
 **How it works:**
+
 - Runs after HTML generation via `imageOptimizeTransform`
 - Uses Cheerio to parse HTML and find `<img>` tags
 - Automatically converts to responsive `<picture>` elements
 - Only affects artifact detail pages (not listing pages)
 
 **Output format:**
+
 ```html
 <picture>
   <source type="image/webp"
@@ -203,6 +216,7 @@ The project has a **two-tier image optimization system**:
 ```
 
 **Special cases:**
+
 - **GIFs:** Automatically preserved as-is (no optimization to maintain animation)
 - **Skip optimization:** Add `data-no-optimize` attribute to any `<img>` tag
 - **Custom sizes:** Add `data-sizes="(max-width: 768px) 100vw, 50vw"` to customize responsive sizes
@@ -212,18 +226,22 @@ The project has a **two-tier image optimization system**:
 Defined in `lib/image-shortcodes.js`:
 
 **thumbnailImg** - For listing pages
+
 ```njk
 {% thumbnailImg "/artifacts/name/cover.png", "Alt text" %}
 ```
+
 - Generates 300px width thumbnail
 - WebP + JPEG fallback
 - Output filename: `thumb-300w.{webp,jpeg}`
 - Used in category listing pages
 
 **responsiveImg** - Custom responsive images
+
 ```njk
 {% responsiveImg "/path/to/image.jpg", "Alt text", "(max-width: 768px) 100vw, 50vw" %}
 ```
+
 - Generates 4 sizes: 400, 800, 1200, 1600px
 - Custom sizes attribute (default: "100vw")
 - Outputs to `/dist/img/` directory
@@ -237,6 +255,7 @@ Artifacts need relative paths in markdown (clean authoring) but absolute paths w
 ### Two-Part Solution
 
 **1. eleventyComputed.js** (Data-time transformation)
+
 - Runs during data phase BEFORE template rendering
 - Transforms the `image` field in artifact front matter
 - Converts: `image: "cover.png"` → `image: "/artifacts/[name]/cover.png"`
@@ -244,6 +263,7 @@ Artifacts need relative paths in markdown (clean authoring) but absolute paths w
 - Preserves absolute paths and external URLs unchanged
 
 **Why this is needed:**
+
 ```
 Without computed data:
 - Artifact frontmatter: image: "cover.png"
@@ -257,6 +277,7 @@ With computed data:
 ```
 
 **2. artifact-path-transform.js** (HTML-time transformation)
+
 - Runs during transform phase AFTER HTML generation
 - Expands relative paths in `src` and `href` attributes
 - Only affects artifact pages (URL pattern: `/artifacts/*/`)
@@ -268,6 +289,7 @@ With computed data:
 In artifact markdown, you can use:
 
 **Relative paths (auto-expanded):**
+
 ```markdown
 ![Caption](image.png)                    → /artifacts/my-project/image.png
 ![Caption](subfolder/image.png)          → /artifacts/my-project/subfolder/image.png
@@ -275,12 +297,14 @@ In artifact markdown, you can use:
 ```
 
 **Absolute paths (unchanged):**
+
 ```markdown
 ![Caption](/artifacts/other/image.png)   → /artifacts/other/image.png
 ![Caption](/assets/images/global.png)    → /assets/images/global.png
 ```
 
 **External URLs (unchanged):**
+
 ```markdown
 ![Caption](https://example.com/img.png)  → https://example.com/img.png
 ```
@@ -290,12 +314,14 @@ In artifact markdown, you can use:
 ### eleventy.config.js
 
 **Basic Settings:**
+
 - Input directory: `site/`
 - Output directory: `dist/`
 - Includes directory: `site/_includes/`
 - Default layout: `base.njk` (applied globally)
 
 **Markdown Configuration:**
+
 - Library: markdown-it
 - Options: `{ html: true }` (allows embedded HTML)
 - Plugins:
@@ -303,29 +329,35 @@ In artifact markdown, you can use:
   - `@vrcd-community/markdown-it-video` - YouTube/Vimeo embeds (default size: 560x315)
 
 **Transforms (run in order):**
+
 1. `artifactPaths` - Expands relative paths to absolute
 2. `optimizeImages` - Converts images to responsive picture elements
 
 **Async Shortcodes:**
+
 - `thumbnailImg` - 300px optimized thumbnails
 - `responsiveImg` - Multi-size responsive images
 
 **Global Data:**
+
 - `gitInfo` - From simple-git: `{ branch, commit, shortCommit }`
 - `year` - Current year
 - `isDev` - Boolean for dev server mode
 
 **Collections:**
+
 - `artifacts` - Auto-generated from `site/artifacts/*/index.md`
 - Draft filtering logic (lines 82-91)
 
 **Passthrough Copy:**
+
 - `site/assets/` → `dist/assets/` (verbatim)
 - `site/artifacts/**/*.{png,jpg,jpeg,gif,mp4,mov}` → Respective artifact folders in dist/
 
 ### package.json
 
 **Production Dependencies:**
+
 - `@11ty/eleventy@3.1.2` - Static site generator
 - `@vrcd-community/markdown-it-video@1.1.1` - Video embed support
 - `del-cli@6.0.0` - Clean script utility
@@ -334,10 +366,12 @@ In artifact markdown, you can use:
 - `simple-git@3.30.0` - Git integration for footer
 
 **Dev Dependencies:**
+
 - `@11ty/eleventy-img@6.0.4` - Image optimization
 - `cheerio@1.1.2` - HTML parsing for transforms
 
 ### .editorconfig
+
 - Default: Tab indentation
 - JS/JSX/TS files: 2-space indents
 - CSS files: 3-space indents
@@ -347,12 +381,14 @@ In artifact markdown, you can use:
 ### Adding an Artifact
 
 **1. Create folder structure:**
+
 ```bash
 mkdir site/artifacts/my-project
 cd site/artifacts/my-project
 ```
 
 **2. Create index.md with front matter:**
+
 ```yaml
 ---
 title: Project Name
@@ -385,12 +421,14 @@ Markdown content with **formatting**.
 ```
 
 **3. Add asset files:**
+
 - Place images/videos in same folder as index.md
 - Use relative paths in markdown
 - Images automatically optimize to responsive formats
 - GIFs preserved (no optimization)
 
 **4. Preview in dev mode:**
+
 ```bash
 npm start
 # Visit http://localhost:8080/artifacts/my-project/
@@ -398,6 +436,7 @@ npm start
 ```
 
 **5. Publish:**
+
 - Remove `draft: true` from front matter (or set to `false`)
 - Commit and push to `main` branch
 - GitHub Actions automatically deploys
@@ -405,42 +444,50 @@ npm start
 ### Artifact Front Matter Reference
 
 **Required fields:**
+
 - `title` - Project name (string)
 - `date` - ISO date for sorting, YYYY-MM-DD format (newest first)
 - `tags` - Must include `["artifacts", "portfolio"]` at minimum
 
 **Recommended fields:**
+
 - `time` - Human-readable time period (e.g., "nov 2022", "ongoing since 2021")
 - `subtitle` - Brief description or medium
 - `image` - Cover image (relative path, auto-expanded)
 - Category tag: One of `tech`, `art`, or `brand`
 
 **Optional fields:**
+
 - `draft` - Boolean, hides from production if `true`
 - Additional tags for filtering/organization
 
 ### Markdown Features
 
 **Standard markdown:**
+
 - Headings (`#`, `##`, etc.)
 - Lists (ordered/unordered)
 - Links, emphasis, code blocks
 - Tables, blockquotes
 
 **Embedded HTML:**
+
 - Full HTML support (markdown-it configured with `html: true`)
 - Mix markdown and HTML freely
 
 **Automatic image captions:**
+
 - Alt text becomes `<figcaption>` automatically
 - Example: `![My caption](image.png)` → `<figure><img><figcaption>My caption</figcaption></figure>`
 
 **Video embeds:**
+
 - YouTube: `@[youtube](VIDEO_ID)`
 - Vimeo: `@[vimeo](VIDEO_ID)`
 - Native: `<video src="file.mp4" controls></video>` (paths auto-expand)
 
 **Image optimization control:**
+
 - Automatic by default (responsive `<picture>` element)
 - Skip optimization: Add `data-no-optimize` attribute
 - Custom responsive sizes: Add `data-sizes="(max-width: 768px) 100vw, 50vw"`
@@ -449,11 +496,13 @@ npm start
 ### Tag Taxonomy
 
 **Categories (for filtering):**
+
 - `tech` - Technical/development projects
 - `art` - Artistic/creative work
 - `brand` - Branding/identity design
 
 **Common subcategories:**
+
 - `max for live` - Ableton Live plugins
 - `dsp` - Digital signal processing
 - `3d` - 3D modeling/rendering
@@ -465,11 +514,13 @@ npm start
 - `hardware` - Physical hardware
 
 **Attributes:**
+
 - `silly + fun` - Lighthearted projects
 - `collab` - Collaborative work
 - `performance tool` - Tools for live performance
 
 **Required on all artifacts:**
+
 - `artifacts` - Marks as part of artifacts collection
 - `portfolio` - Marks as portfolio item
 
@@ -478,12 +529,14 @@ npm start
 ### Homepage & Category Pages (categories.njk)
 
 **Single template generates 4 pages via pagination:**
+
 - `/` - All artifacts (no filter)
 - `/tech/` - Tech category
 - `/art/` - Art category
 - `/brand/` - Brand category
 
 **Features:**
+
 - Filters artifacts by tags
 - Uses `thumbnailImg` shortcode for optimized 300px thumbnails
 - Shows "(DRAFT)" indicator for unpublished artifacts
@@ -496,6 +549,7 @@ npm start
 **Data source:** `/site/_data/credits.json`
 
 **Data structure:**
+
 ```json
 {
   "title": "Song Title",
@@ -510,6 +564,7 @@ npm start
 ```
 
 **Page sections:**
+
 - Client Work (type: "client")
 - Original Work (type: "original")
 - Chronological display with format indicators
@@ -520,6 +575,7 @@ npm start
 **Purpose:** QR code destination for lost items
 
 **Features:**
+
 - Standalone HTML (no base layout)
 - Contact methods: email, phone, SMS, Instagram
 - Pre-filled email/SMS templates
@@ -533,15 +589,18 @@ npm start
 Displays context-aware banners at top of page:
 
 **1. Dev Server Mode** (yellow banner)
+
 - Shows when `ELEVENTY_RUN_MODE === 'serve'`
 - Message: "DEVELOPMENT SERVER"
 
 **2. Beta Branch** (orange banner)
+
 - Shows when deployed on beta branch
 - Includes link to production site
 - Message: "BETA SITE - View production at [link]"
 
 **3. Draft Pages** (gray banner)
+
 - Shows on individual pages with `draft: true`
 - Message: "THIS PAGE IS A DRAFT"
 
@@ -550,11 +609,13 @@ Displays context-aware banners at top of page:
 ### Draft System
 
 **Visibility:**
+
 - Dev mode (`npm start`): All artifacts visible including drafts
 - Production build (`npm run build`): Drafts filtered out
 - Draft pages show gray banner in dev mode
 
 **Configuration:**
+
 - Set `draft: true` in artifact front matter
 - Draft filtering logic in eleventy.config.js (lines 82-91)
 - 18 artifacts currently marked as draft (as of Dec 25, 2025)
@@ -566,10 +627,12 @@ Displays context-aware banners at top of page:
 **File:** `.github/workflows/main.yml`
 
 **Trigger:**
+
 - Push to `main` branch
 - Manual workflow dispatch
 
 **Steps:**
+
 1. Checkout repository
 2. Setup Node.js 20 with npm caching
 3. Install dependencies (`npm ci`)
@@ -579,16 +642,19 @@ Displays context-aware banners at top of page:
 7. Deploy via rsync to production server
 
 **Deployment command:**
+
 ```bash
 rsync -avz --delete ./dist/ $SSH_USER@$SSH_HOST:/home/[user]/john-trinh.com/
 ```
 
 **Required GitHub Secrets:**
+
 - `SSH_PRIVATE_KEY` - Server SSH private key
 - `SSH_HOST` - Server IP address
 - `SSH_USER` - SSH username
 
 **Notes:**
+
 - `--delete` flag removes files from server that aren't in dist/
 - Deployment target: `/home/[user]/john-trinh.com/` on remote server
 
@@ -608,6 +674,7 @@ site/artifacts/my-project/index.md → /artifacts/my-project/index.html
 ```
 
 **URL patterns:**
+
 - Pretty URLs enabled (index.html files in folders)
 - `/artifacts/name/` shows `/artifacts/name/index.html`
 - No file extensions in URLs
@@ -615,6 +682,7 @@ site/artifacts/my-project/index.md → /artifacts/my-project/index.html
 ## Common Tasks
 
 ### Add a new artifact
+
 ```bash
 mkdir site/artifacts/project-name
 # Create index.md with front matter
@@ -623,15 +691,18 @@ npm start  # Preview at localhost:8080/artifacts/project-name/
 ```
 
 ### Update credits
+
 Edit `site/_data/credits.json` with new entries
 
 ### Clean and rebuild
+
 ```bash
 npm run clean
 npm run build
 ```
 
 ### Preview production build locally
+
 ```bash
 npm run build
 # Serve dist/ folder with any static server
@@ -639,13 +710,16 @@ npx http-server dist/
 ```
 
 ### Check performance
+
 ```bash
 npm run bench
 # Shows timing for each template rendering
 ```
 
 ### Force image re-optimization
+
 Delete generated images in `dist/artifacts/[name]/` and rebuild:
+
 ```bash
 rm dist/artifacts/project-name/*-{400,800,1200,1600}w.{webp,jpeg}
 npm run build
@@ -669,10 +743,12 @@ npm run build
 **CRITICAL: ALL code must be thoroughly commented following this standard.**
 
 Reference examples:
+
 - [site/_data/eleventyComputed.js](site/_data/eleventyComputed.js) - Exemplary file-level and inline commenting
 - [eleventy.config.js](eleventy.config.js) - Clean inline comments explaining each configuration
 
 **File-level documentation:**
+
 ```javascript
 /**
  * Brief description of file purpose
@@ -689,6 +765,7 @@ Reference examples:
 ```
 
 **Function-level documentation:**
+
 ```javascript
 /**
  * Brief description of what function does
@@ -702,6 +779,7 @@ Reference examples:
 ```
 
 **Inline comments:**
+
 - Explain WHAT each section does
 - Explain WHY decisions were made
 - Call out edge cases and special handling
@@ -715,23 +793,51 @@ Reference examples:
 ## Known Issues & Limitations
 
 ### Stale Build Artifacts
+
 - Some deleted artifacts may still exist in `dist/` folder
 - Recommendation: Run `npm run clean && npm run build` periodically
 
 ### Draft Artifacts
+
 - 18 artifacts currently marked as draft (mostly SFFH campaign)
 - Won't appear in production until `draft: true` removed
 
 ### No Dedicated Homepage
+
 - Homepage generated by categories.njk pagination (unconventional but functional)
 - Consider creating dedicated `site/index.njk` if custom homepage needed
 
 ### Build Output Cleanup
+
 - `.DS_Store` files may appear in dist/ folder
 - Consider adding to `.gitignore` or cleaning in build script
 
 ## GIT COMMIT STYLE
 
-- When composing git commit messages for this repository, use the exact phrasing the user provides when they explicitly supply a commit message. Do not prepend, append, or modify the message text.
-- When the assistant must create commit messages without an explicit message from the user, use a short, direct imperative subject (one line), keeping messages minimal unless the user requests more detail.
+- Always use the user's exact commit phrasing when they provide one. Do not prepend, append, reword, scope, or otherwise modify the message — use it verbatim.
+- If the assistant must write commit messages without an explicit user-provided message, copy the user's terse style exactly: a single short line, minimal punctuation, no body, and no extra metadata. Emulate the user's tone so commits read like they were all written by one person, even if that style is very reductive.
+- When the user later supplies a different phrasing or pattern, adopt that new style consistently for subsequent commits.
 
+### Profile (how to write like the user)
+
+- Voice: single-author, informal and conversational — sometimes profane, often terse.
+- Case & punctuation: follow the user's exact casing and punctuation (often lowercase or sentence-style); expressive punctuation is allowed.
+- Length: prefer a single short subject line. Avoid bodies unless the user explicitly requests a longer message.
+- Tone: direct, occasionally playful/angry, minimal polish. Use colloquial words and contractions freely.
+- Prefixes: the user sometimes uses conventional prefixes (`refactor:`, `chore:`) but often writes freeform; prefer freeform unless recent history shows a prefix pattern.
+
+Guidelines the assistant must follow when composing commits:
+
+- If the user supplies a message: commit verbatim, no edits.
+- If composing for the user: produce a one-line subject, mimic their tone and casing, and keep it compact (<~60 chars preferred).
+- Do not add metadata, scopes, or explanatory bodies unless the user requests them.
+- When in doubt, ask the user for the exact line to use.
+
+Examples (real patterns from the repo):
+
+- "fixed that bullshit about page man"
+- "whatever man!! whatever changed idk about it."
+- "trying to fix fucking encoding issue"
+- "bunchhh of new portfolio entriesss"
+- "fixed all the video shit and borken youtube links"
+- "added lost item page!!! and updated other fings"
