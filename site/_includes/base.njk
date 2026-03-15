@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% include "head.njk" %}
-    <body>
-        {% include "dev-hud.njk" %}
-        {% include "header.njk" %}
-        <main>
-            {{ content | safe }}
-        </main>
-        {% include "footer.njk" %}
+	{% include "head.njk" %}
+	<body>
+		{% include "dev-hud.njk" %}
+		{% include "header.njk" %}
+		<main>
+			{{ content | safe }}
+		</main>
+		{% include "footer.njk" %}
 
-        {# add-ins #}
-        {#{% include "background.njk" %}#}
-    </body>
+		{# add-ins #}
+		{#{% include "background.njk" %}#}
+	</body>
 </html>

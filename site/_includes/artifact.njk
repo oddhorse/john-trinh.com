@@ -3,14 +3,72 @@ layout: base.njk
 ---
 
 {% block content %}
-    <h2>{{ title }}</h2>
-    <h3>
-        <i>{{ time }}. {{ subtitle }}</i>
-    </h3>
-    {#
+	<script>
+		document
+			.documentElement
+			.classList
+			.add('booting-list-replace');
+	</script>
+	<style>
+		html.booting-list-replace main {
+			visibility: hidden;
+		}
+	</style>
+	<h2>{{ title }}</h2>
+	<h3>
+		<i>{{ time }}. {{ subtitle }}</i>
+	</h3>
+	{#
     {% if image %}
         <img src="{{ image }}" alt="{{ title }} image" style="max-width:400px;display:block;">
     {% endif %}
     #}
-    {{ content | safe }}
+	{{ content | safe }}
 {% endblock %}
+
+{# If this artifact page is visited directly (pretty URL), boot the list view
+   by fetching the homepage and initializing the list+detail UI purely client-side. #}
+<script type="module">
+	/* Client-side boot for pretty URLs: if a user opens /artifacts/name/ directly,
+   fetch the list page, replace the body with the list layout, and initialize
+   the list loader so the detail panel shows this artifact without a full server-side
+   rewrite. This is a JS-only solution to enable pretty URLs while keeping the
+   interactive list/detail UX. */
+	import ('/assets/js/home.js').then(async (m) => {
+		try {
+			const currentPath = location.pathname + location.search
+			// fetch the homepage (list) HTML
+			const res = await fetch('/')
+			if (!res.ok) 
+				return
+			const text = await res.text()
+			const parser = new DOMParser()
+			const doc = parser.parseFromString(text, 'text/html')
+			const newBody = doc.body
+			if (newBody) {
+				// Replace current body with the homepage body content
+				document.body.innerHTML = newBody.innerHTML
+				// done booting: reveal main content
+				document
+					.documentElement
+					.classList
+					.remove('booting-list-replace')
+				// Ensure styles/scripts already in head remain; now init the list module
+				if (m && typeof m.init === 'function') {
+					m.init()
+					// open this artifact in the detail panel without pushing a new history entry
+					if (typeof m.openDetail === 'function') {
+						m.openDetail(currentPath, false)
+						// ensure history state corresponds to the pretty URL
+						history.replaceState({
+							href: currentPath
+						}, '', currentPath)
+					}
+				}
+			}
+		} catch (err) {
+			// if anything fails, fall back to normal artifact page rendering
+			console.error('booting list view failed', err)
+		}
+	})
+</script>

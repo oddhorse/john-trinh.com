@@ -127,3 +127,30 @@ li::marker {
 		overflow: visible;
 	}
 }
+
+/* Ensure images, pictures, videos and iframes inside the detail panel
+   never overflow their containing segment and stay responsive. */
+#portfolio-detail img,
+#portfolio-detail picture,
+#portfolio-detail video,
+#portfolio-detail iframe,
+#portfolio-detail figure,
+#portfolio-detail picture img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+/* Make iframes (YouTube embeds) scale responsively with an intrinsic ratio. */
+#portfolio-detail iframe {
+	width: 100%;
+	aspect-ratio: 16/9;
+	max-width: 100%;
+	border: none;
+}
+
+/* Generic wrapper safety for embed containers */
+#portfolio-detail .video-wrapper {
+	width: 100%;
+	max-width: 100%;
+}
