@@ -21,37 +21,46 @@ categories:
     permalink: "/brand/"
 ---
 
-<h1>{{ category.title }}</h1>
+<link rel="stylesheet" href="/assets/css/home.css">
 
-<!--
-<nav>
-  <a href="/">all</a>
-  <a href="/tech/">tech</a>
-  <a href="/art/">art</a>
-  <a href="/brand/">brand</a>
-</nav>
--->
+<section id="list-display">
+	<article id="portfolio-list-box">
 
-<ul>
-  {% for artifact in collections.artifacts | reverse %}
-    {% if not category
-      .filter or artifact
-      .data
-      .tags
-      .includes(category.filter) %}
-      <li>
-        {% if artifact.data.image %}
-          {% thumbnailImg artifact.data.image,
-          artifact.data.title %}
-        {% endif %}
-        <a href="{{ artifact.url }}">{{ artifact.data.title }}</a>
-        {% if artifact.data.draft %}
-          <span style="color: red;"> (DRAFT) </span>
-        {% endif %}
-        {% if artifact.data.subtitle %}
-          <span> — {{ artifact.data.subtitle }}</span>
-        {% endif %}
-      </li>
-    {% endif %}
-  {% endfor %}
-</ul>
+		<nav>
+			<a href="/">all</a>
+			<a href="/tech/">tech</a>
+			<a href="/art/">art</a>
+			<a href="/brand/">brand</a>
+		</nav>
+		<ul id="portfolio-list">
+			{% for artifact in collections.artifacts | reverse %}
+				{% if not category
+					.filter or artifact
+					.data
+					.tags
+					.includes(category.filter) %}
+					<li class="grid-entry">
+						<div class="entry-meta">
+							{% if artifact.data.time %}
+								<time class="entry-time">{{ artifact.data.time }}</time>
+							{% endif %}
+							{% if artifact.data.draft %}
+								<span class="draft">(DRAFT)</span>
+							{% endif %}
+						</div>
+						<div class="entry-body">
+							<a class="entry-title" href="{{ artifact.url }}">{{ artifact.data.title }}</a>
+							{% if artifact.data.subtitle %}
+								<div class="entry-subtitle">{{ artifact.data.subtitle }}</div>
+							{% endif %}
+						</div>
+					</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</article>
+
+	<article id="portfolio-detail"></article>
+</section>
+
+<script type="module" src="/assets/js/home.js"></script>

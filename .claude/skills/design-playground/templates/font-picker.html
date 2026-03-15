@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Picker — Design Playground</title>
+
+    <!--
+    ============================================
+    FONT PICKER PLAYGROUND
+    ============================================
+
+    Interactive tool for choosing font pairings.
+
+    HOW TO USE:
+    1. Click option buttons to preview different font combinations
+    2. See how fonts look with your actual content
+    3. Test at different sizes (headings, body, small text)
+    4. Click "Export Choice" when decided
+    5. Paste exported tokens back to Claude
+
+    FONT PHILOSOPHY:
+    - Heading font: More personality (establishes tone)
+    - Body font: More readable (serves content)
+    - Mono font: For code/technical content
+
+    ============================================
+    -->
+
+    <style>
+        /* ============================================
+           BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+            padding: 2rem;
+        }
+
+        /* ============================================
+           CONTROLS
+           Top section with option buttons and export
+           ============================================ */
+        .controls {
+            position: sticky;
+            top: 0;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+
+        .controls h2 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            border-color: #666;
+        }
+
+        button.active {
+            background: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+        }
+
+        .export-btn {
+            background: #0066cc;
+            color: white;
+            border-color: #0066cc;
+            font-weight: 600;
+        }
+
+        .export-btn:hover {
+            background: #0052a3;
+            border-color: #0052a3;
+        }
+
+        .font-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* ============================================
+           PREVIEW CONTENT
+           Your actual portfolio content rendered in selected fonts
+           ============================================ */
+        .preview {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+        }
+
+        /* Dynamic font application - JavaScript will set these */
+        .preview h1,
+        .preview h2,
+        .preview h3 {
+            font-family: var(--font-heading);
+            line-height: 1.2;
+        }
+
+        .preview p,
+        .preview li {
+            font-family: var(--font-body);
+        }
+
+        .preview code {
+            font-family: var(--font-mono);
+        }
+
+        /* Spacing and hierarchy */
+        .preview h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .preview .tagline {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            color: #666;
+        }
+
+        .preview h2 {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1rem;
+            font-weight: 600;
+        }
+
+        .preview h3 {
+            font-size: 1.3rem;
+            margin: 2rem 0 0.75rem;
+            font-weight: 600;
+        }
+
+        .preview p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .preview ul {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .preview li {
+            margin-bottom: 0.5rem;
+        }
+
+        .preview code {
+            background: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        /* ============================================
+           FONT OPTION DEFINITIONS
+           Each option is a curated pairing
+           ============================================ */
+
+        /* Option 1: Mono + Sans (Technical & Clean) */
+        .option-1 {
+            --font-heading: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+            --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+        }
+
+        /* Option 2: Geometric Sans (Modern & Technical) */
+        .option-2 {
+            --font-heading: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+            --font-body: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+            --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+        }
+
+        /* Option 3: Serif + Sans (Artistic & Readable) */
+        .option-3 {
+            --font-heading: 'Georgia', 'Times New Roman', serif;
+            --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+        }
+
+        /* Option 4: Display Sans (Unique & Bold) */
+        .option-4 {
+            --font-heading: 'Helvetica Neue', 'Arial', sans-serif;
+            --font-body: 'Georgia', 'Times New Roman', serif;
+            --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+        }
+
+        /* Option 5: System Fonts (Fast & Professional) */
+        .option-5 {
+            --font-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+        }
+
+        /* Option 6: Mono Everything (Very Technical) */
+        .option-6 {
+            --font-heading: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+            --font-body: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+            --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         CONTROLS SECTION
+         ============================================ -->
+    <div class="controls">
+        <h2>Choose Your Font Pairing</h2>
+        <div class="button-group">
+            <button onclick="applyOption(1)" class="active">Option 1: Mono + Sans</button>
+            <button onclick="applyOption(2)">Option 2: Geometric</button>
+            <button onclick="applyOption(3)">Option 3: Serif + Sans</button>
+            <button onclick="applyOption(4)">Option 4: Inverted</button>
+            <button onclick="applyOption(5)">Option 5: System</button>
+            <button onclick="applyOption(6)">Option 6: Mono All</button>
+        </div>
+        <button class="export-btn" onclick="exportChoice()">📋 Export Choice</button>
+
+        <div class="font-info" id="font-info">
+            <strong>Option 1:</strong> Monospace headings + Sans-serif body<br>
+            Technical, distinctive, good contrast between heading and body.
+        </div>
+    </div>
+
+    <!-- ============================================
+         PREVIEW SECTION
+         Your actual portfolio content
+         ============================================ -->
+    <div class="preview option-1" id="preview">
+        <h1>John Trinh</h1>
+        <p class="tagline">artist-technologist building infrastructure for creative concepts</p>
+
+        <h2>Performance Technology</h2>
+        <p>Custom MIDI controllers, Max for Live devices, and live performance systems that bridge the gap between creative vision and technical implementation.</p>
+
+        <h3>Recent Projects</h3>
+        <ul>
+            <li>Glove MIDI Controller — wearable performance interface with BLE connectivity</li>
+            <li>GRUBBLER — Max for Live ring modulator with automatic gain compensation</li>
+            <li>TouchDesigner visual systems for live performance</li>
+        </ul>
+
+        <h2>About</h2>
+        <p>Junior at NYU's Clive Davis Institute studying music production and creative technology. Work spans music production, software development, hardware design, and visual arts. If I don't know how to do something today, I will by next week.</p>
+
+        <p>Technical depth includes 5+ years in Ableton Live, 3000+ hours in Blender, and experience across Max/MSP, JavaScript, C++, and Python. Professional work includes mixing/mastering services and custom controller builds for other artists.</p>
+
+        <h3>Technical Stack</h3>
+        <p>Example code reference: <code>eleventyConfig.addTransform()</code></p>
+    </div>
+
+    <!-- ============================================
+         JAVASCRIPT
+         Handles option switching and export
+         ============================================ -->
+    <script>
+        // Font option metadata
+        // Descriptions explain the personality and use case of each pairing
+        const options = {
+            1: {
+                name: "Mono + Sans",
+                description: "Monospace headings + Sans-serif body. Technical, distinctive, good contrast.",
+                fonts: {
+                    heading: "'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace",
+                    body: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                    mono: "'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace"
+                }
+            },
+            2: {
+                name: "Geometric",
+                description: "Inter/Helvetica throughout. Modern, clean, very readable. Professional.",
+                fonts: {
+                    heading: "'Inter', 'Helvetica Neue', 'Arial', sans-serif",
+                    body: "'Inter', 'Helvetica Neue', 'Arial', sans-serif",
+                    mono: "'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace"
+                }
+            },
+            3: {
+                name: "Serif + Sans",
+                description: "Georgia headings + Sans body. Classic, artistic, warm but professional.",
+                fonts: {
+                    heading: "'Georgia', 'Times New Roman', serif",
+                    body: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                    mono: "'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace"
+                }
+            },
+            4: {
+                name: "Inverted",
+                description: "Sans headings + Serif body. Unexpected, literary, distinctive.",
+                fonts: {
+                    heading: "'Helvetica Neue', 'Arial', sans-serif",
+                    body: "'Georgia', 'Times New Roman', serif",
+                    mono: "'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace"
+                }
+            },
+            5: {
+                name: "System",
+                description: "System fonts throughout. Fastest loading, native feel, professional.",
+                fonts: {
+                    heading: "-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
+                    body: "-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
+                    mono: "'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace"
+                }
+            },
+            6: {
+                name: "Mono All",
+                description: "Monospace everything. Very technical, code-focused, distinctive but less readable.",
+                fonts: {
+                    heading: "'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace",
+                    body: "'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace",
+                    mono: "'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace"
+                }
+            }
+        };
+
+        // Track currently selected option
+        let currentOption = 1;
+
+        /**
+         * Apply a font option to the preview
+         * Updates CSS class and button states
+         *
+         * @param {number} optionNum - The option number (1-6)
+         */
+        function applyOption(optionNum) {
+            currentOption = optionNum;
+
+            // Update preview class to apply new fonts
+            const preview = document.getElementById('preview');
+            preview.className = `preview option-${optionNum}`;
+
+            // Update button active states
+            const buttons = document.querySelectorAll('.button-group button');
+            buttons.forEach((btn, idx) => {
+                if (idx + 1 === optionNum) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update info text
+            const info = options[optionNum];
+            document.getElementById('font-info').innerHTML = `
+                <strong>Option ${optionNum}:</strong> ${info.description}
+            `;
+        }
+
+        /**
+         * Export the currently selected font choice
+         * Copies design tokens to clipboard as JSON
+         */
+        function exportChoice() {
+            const choice = options[currentOption];
+
+            // Create design tokens object
+            const tokens = {
+                choice: currentOption,
+                name: choice.name,
+                fonts: choice.fonts,
+                css: {
+                    heading: `--font-heading: ${choice.fonts.heading};`,
+                    body: `--font-body: ${choice.fonts.body};`,
+                    mono: `--font-mono: ${choice.fonts.mono};`
+                }
+            };
+
+            // Convert to formatted JSON
+            const json = JSON.stringify(tokens, null, 2);
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(json).then(() => {
+                // Show success feedback
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                btn.style.background = '#00aa00';
+
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#0066cc';
+                }, 2000);
+
+                // Also log to console
+                console.log('Exported design tokens:', tokens);
+            });
+        }
+
+        // Apply initial option on load
+        applyOption(1);
+    </script>
+</body>
+</html>

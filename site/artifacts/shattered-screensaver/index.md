@@ -11,7 +11,7 @@ image: screenshot.png
 ---
 
 <video controls width="100%" loop>
-  <source src="demo-video.mov" type="video/quicktime">
+  <source src="demo-video.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 

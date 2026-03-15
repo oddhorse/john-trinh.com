@@ -8,6 +8,7 @@ tags:
   - tech
   - performance
   - hardware
+  - art
 image: 
 draft: true
 # TODO: finish!

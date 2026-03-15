@@ -14,3 +14,7 @@ TODO: finish this!
 PILL BOTTLE. HORSE PILLS. TAKE ONE. WHO KNOWS WHAT WILL HAPPEN
 
 promo concept for my 2023 album, *So far from home*, doubling as realistic 3d rendering practice. was real deep in pbr hell for this one. first time i really felt like i nailed the process! animation was just a blender physics simulation
+
+## Part of Campaign
+
+This pill bottle was created as part of the [So far from home visual campaign](/artifacts/sffh-campaign/) and featured in the [single cover artworks](/artifacts/sffh-single-covers/).
