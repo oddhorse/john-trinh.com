@@ -7,3 +7,43 @@
 :root {
 	font-family: 'DOS', monospace;
 }
+
+:root {
+	--scroll-thumb: rgba(0, 0, 0, .32);
+	--scroll-thumb-hover: rgba(0, 0, 0, .5);
+}
+
+/* Firefox (modern) */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--scroll-thumb) transparent;
+	/* thumb, track */
+}
+
+/* Chromium / WebKit */
+::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--scroll-thumb);
+	border-radius: 8px;
+	border: 3px solid transparent;
+	/* padding so thumb doesn't touch edges */
+	background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--scroll-thumb-hover) !important;
+	box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.03) inset, 0 1px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* active (pressed) state */
+::-webkit-scrollbar-thumb:active {
+	background: rgba(0, 0, 0, 0.6) !important;
+}
