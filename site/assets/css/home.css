@@ -46,7 +46,6 @@ main {
 	/* scroll within each column when content exceeds available height */
 
 	border: 5px black wavy;
-	border-style: ;
 }
 
 #portfolio-list {

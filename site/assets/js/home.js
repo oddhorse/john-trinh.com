@@ -80,11 +80,8 @@ export function init() {
 		if (state && state.href) {
 			openDetail(state.href, false)
 		} else {
-			// no state = show list (load first item or clear detail)
-			const first = document.querySelector('.grid-entry .entry-title')
-			if (first) {
-				openDetail(first.getAttribute('href'), false)
-			}
+			// no state = show list only (clear detail and active state)
+			clearDetail()
 		}
 	})
 
@@ -97,12 +94,21 @@ export function init() {
 		// set initial state for back/forward
 		history.replaceState({ href: currentHref }, '', currentHref)
 	} else {
-		// load first artifact by default
-		const first = document.querySelector('.grid-entry .entry-title')
-		if (first) {
-			openDetail(first.getAttribute('href'), false)
-		}
+		// list page: do not auto-open any artifact by default
+		// leave the detail pane empty so no artifact appears selected
+		clearDetail()
 	}
+}
+
+function clearDetail() {
+	const detail = document.getElementById('portfolio-detail')
+	if (detail) {
+		// show a neutral placeholder or empty state
+		detail.innerHTML = '<p class="detail-placeholder">Select an item to view details.</p>'
+		detail.removeAttribute('tabindex')
+	}
+	// clear active state on entries
+	document.querySelectorAll('.grid-entry .entry-title').forEach(el => el.classList.remove('active'))
 }
 
 // auto-init when loaded as a module on the list page
