@@ -109,6 +109,8 @@ li::marker {
 	font-size: 1em;
 }
 
+
+
 /* Stack columns on small screens and allow normal page scrolling */
 @media (max-width: 800px) {
 	#list-display {
