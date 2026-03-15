@@ -11,12 +11,12 @@ image: hdri-of-my-living-room.png
 ---
 
 <video controls width="100%" loop>
-  <source src="magic.mov" type="video/quicktime">
+  <source src="magic.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
 <video controls width="100%">
-  <source src="the-raw-footage.mov" type="video/quicktime">
+  <source src="the-raw-footage.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 

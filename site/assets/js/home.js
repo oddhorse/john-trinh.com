@@ -18,6 +18,8 @@ async function loadDetailContent(url) {
 			// fallback: full body
 			detail.innerHTML = doc.body.innerHTML
 		}
+		// enhance any local video elements: try mp4 fallback or show download link
+		enhanceVideos(detail)
 		// focus detail for accessibility
 		detail.setAttribute('tabindex', '-1')
 		detail.focus()
@@ -25,6 +27,51 @@ async function loadDetailContent(url) {
 		detail.innerHTML = '<p>Error loading content.</p>'
 		console.error(err)
 	}
+}
+
+// Try to improve local video playback: prefer .mp4 sibling if available,
+// otherwise show a download link if browser can't play provided sources.
+function enhanceVideos(container) {
+	if (!container) return
+	const videos = container.querySelectorAll('video')
+	videos.forEach(async (vid) => {
+		// if browser can play at least one source, do nothing
+		const sources = Array.from(vid.querySelectorAll('source'))
+		const canPlay = sources.some(s => {
+			const type = s.getAttribute('type') || ''
+			try { return vid.canPlayType(type) !== '' }
+			catch (e) { return false }
+		})
+		if (canPlay) return
+
+		// try to find an mp4 sibling by swapping the extension
+		for (const s of sources) {
+			const src = s.getAttribute('src')
+			if (!src) continue
+			const mp4 = src.replace(/\.[^.]+$/, '.mp4')
+			try {
+				const head = await fetch(mp4, { method: 'HEAD' })
+				if (head.ok) {
+					// replace sources with mp4 and reload
+					vid.innerHTML = `<source src="${mp4}" type="video/mp4">` +
+									'<p>Your browser does not support the video tag.</p>'
+					vid.load()
+					return
+				}
+			} catch (err) {
+				// ignore network errors
+			}
+		}
+
+		// nothing playable found: add a download link below the video
+		const firstSrc = sources[0] && sources[0].getAttribute('src')
+		if (firstSrc) {
+			const dl = document.createElement('p')
+			dl.className = 'video-download'
+			dl.innerHTML = `Can't play this video here — <a href="${firstSrc}" download>download</a>`
+			vid.insertAdjacentElement('afterend', dl)
+		}
+	})
 }
 
 function setActiveByHref(href) {
