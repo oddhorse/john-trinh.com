@@ -59,6 +59,21 @@ export function init() {
 		openDetail(href, true)
 	})
 
+	// Make the whole `.grid-entry` act like clicking its `.entry-title` link.
+	// Ignore clicks on interactive elements (links, buttons, inputs, labels).
+	document.addEventListener('click', (e) => {
+		const entry = e.target.closest('.grid-entry')
+		if (!entry) return
+		// if the click originated inside an actual link or interactive control, skip
+		if (e.target.closest('a, button, input, textarea, select, label')) return
+		const a = entry.querySelector('a.entry-title')
+		if (!a) return
+		const href = a.getAttribute('href')
+		if (!href) return
+		e.preventDefault()
+		openDetail(href, true)
+	})
+
 	// handle back/forward
 	window.addEventListener('popstate', (e) => {
 		const state = e.state
