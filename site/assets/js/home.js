@@ -54,7 +54,7 @@ function enhanceVideos(container) {
 				if (head.ok) {
 					// replace sources with mp4 and reload
 					vid.innerHTML = `<source src="${mp4}" type="video/mp4">` +
-									'<p>Your browser does not support the video tag.</p>'
+						'<p>Your browser does not support the video tag.</p>'
 					vid.load()
 					return
 				}
