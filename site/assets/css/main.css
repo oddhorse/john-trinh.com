@@ -5,12 +5,19 @@
 }
 
 :root {
-	--bg: #F7F5F2;
+	--bg: #FDFBF8;
+	--panel: #F5F2EE;
 	--surface: #FFFFFF;
 	--border: #E0DDD8;
 	--text: #0D0D0D;
 	--muted: #999;
 	--accent: #F03397;
+	--link: #00aede;
+
+	/* category accent colors */
+	--cat-tech: #4A90D9;
+	--cat-art: #D94AA0;
+	--cat-brand: #E8881A;
 
 	font-family: 'Nunito', Arial, sans-serif;
 	color: var(--text);
@@ -31,8 +38,9 @@ body {
 
 /* ===== links ===== */
 a {
-	color: var(--text);
-	text-decoration: none;
+	color: var(--link);
+	text-decoration-style: wavy;
+	text-decoration-skip-ink: none;
 }
 
 a:hover {

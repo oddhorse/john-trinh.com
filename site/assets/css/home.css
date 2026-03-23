@@ -37,12 +37,16 @@ main {
 	overflow: auto;
 	border: 1.5px solid var(--border);
 	border-radius: 8px;
-	background: var(--bg);
+}
+
+#list-display>#portfolio-list-box,
+#list-display>#portfolio-detail {
+	background: var(--panel);
 }
 
 #portfolio-list {
 	margin: 0;
-	padding: 0.5rem;
+	padding: 0.8rem;
 	list-style: none;
 }
 
@@ -122,10 +126,11 @@ main {
 	flex-direction: row;
 	gap: 0;
 	cursor: pointer;
-	box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.12);
+	box-shadow: 2px 3px 0px rgba(240, 51, 151, 0.18);
 	overflow: hidden;
 	/* transforms + hover handled by GSAP in animations.js */
 }
+
 
 .grid-entry:hover {
 	box-shadow: 4px 6px 0px var(--accent);
@@ -166,14 +171,39 @@ li::marker {
 #portfolio-list-box>nav a {
 	font-family: 'Nunito', sans-serif;
 	font-size: 0.78rem;
-	color: var(--muted);
 	text-decoration: none;
 	letter-spacing: 0.06em;
-	transition: color 0.15s;
+	padding: 0.2rem 0.65rem;
+	border-radius: 999px;
+	transition: color 0.15s, background 0.15s;
+	/* default: muted, unpicked state */
+	color: var(--muted);
+	background: transparent;
+}
+
+#portfolio-list-box>nav a[href="/"]:hover,
+#portfolio-list-box>nav a[href="/"] {
+	color: var(--accent);
+	background: rgba(240, 51, 151, 0.1);
+}
+
+#portfolio-list-box>nav a[href="/tech/"] {
+	color: var(--cat-tech);
+	background: rgba(74, 144, 217, 0.1);
+}
+
+#portfolio-list-box>nav a[href="/art/"] {
+	color: var(--cat-art);
+	background: rgba(217, 74, 160, 0.1);
+}
+
+#portfolio-list-box>nav a[href="/brand/"] {
+	color: var(--cat-brand);
+	background: rgba(232, 136, 26, 0.1);
 }
 
 #portfolio-list-box>nav a:hover {
-	color: var(--accent);
+	filter: brightness(1.1);
 }
 
 /* ===== detail panel placeholder ===== */
@@ -217,6 +247,10 @@ li::marker {
 	#portfolio-detail {
 		display: none;
 	}
+}
+
+#portfolio-detail {
+	padding: 0 0.8rem;
 }
 
 /* Ensure images, pictures, videos and iframes inside the detail panel
