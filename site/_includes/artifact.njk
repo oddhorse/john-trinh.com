@@ -35,6 +35,11 @@ layout: base.njk
    rewrite. This is a JS-only solution to enable pretty URLs while keeping the
    interactive list/detail UX. */
 	import ('/assets/js/home.js').then(async (m) => {
+		// on narrow screens, skip body replacement — show server-rendered artifact page as-is
+		if (window.matchMedia('(max-width: 800px)').matches) {
+			document.documentElement.classList.remove('booting-list-replace')
+			return
+		}
 		try {
 			const currentPath = location.pathname + location.search
 			// fetch the homepage (list) HTML

@@ -40,15 +40,18 @@ categories:
 					.tags
 					.includes(category.filter) %}
 					<li class="grid-entry">
-						<div class="entry-meta">
-							{% if artifact.data.time %}
-								<time class="entry-time">{{ artifact.data.time }}</time>
-							{% endif %}
-							{% if artifact.data.draft %}
-								<span class="draft">(DRAFT)</span>
-							{% endif %}
-						</div>
+						{% if artifact.data.image %}
+							<img class="entry-thumb" src="{{ artifact.data.image }}" alt="{{ artifact.data.title }}">
+						{% endif %}
 						<div class="entry-body">
+							<div class="entry-meta">
+								{% if artifact.data.time %}
+									<time class="entry-time">{{ artifact.data.time }}</time>
+								{% endif %}
+								{% if artifact.data.draft %}
+									<span class="draft">draft</span>
+								{% endif %}
+							</div>
 							<a class="entry-title" href="{{ artifact.url }}">{{ artifact.data.title }}</a>
 							{% if artifact.data.subtitle %}
 								<div class="entry-subtitle">{{ artifact.data.subtitle }}</div>
