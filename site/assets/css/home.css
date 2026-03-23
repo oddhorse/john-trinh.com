@@ -36,7 +36,7 @@ main {
 	min-height: 0;
 	overflow: auto;
 	border: 1.5px solid var(--border);
-	border-radius: 3px;
+	border-radius: 8px;
 	background: var(--bg);
 }
 
@@ -71,8 +71,8 @@ main {
 	align-items: baseline;
 	font-size: 0.72rem;
 	color: var(--muted);
-	font-family: 'Space Mono', monospace;
-	letter-spacing: 0.01em;
+	font-family: 'Nunito', sans-serif;
+	font-style: italic;
 	padding: 0;
 }
 
@@ -111,45 +111,23 @@ main {
 .entry-subtitle {
 	color: var(--muted);
 	font-size: 0.82rem;
-	font-family: 'Space Mono', monospace;
+	font-family: 'Nunito', sans-serif;
 }
 
 .grid-entry {
 	background: var(--surface);
 	padding: 0;
-	border-radius: 3px;
+	border-radius: 8px;
 	display: flex;
 	flex-direction: row;
 	gap: 0;
 	cursor: pointer;
 	box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.12);
-	transition: transform 0.15s, box-shadow 0.15s;
 	overflow: hidden;
-}
-
-/* wonky rotations — no two cards the same angle */
-.grid-entry:nth-child(5n+1) {
-	transform: rotate(-1.1deg);
-}
-
-.grid-entry:nth-child(5n+2) {
-	transform: rotate(0.7deg);
-}
-
-.grid-entry:nth-child(5n+3) {
-	transform: rotate(-0.4deg);
-}
-
-.grid-entry:nth-child(5n+4) {
-	transform: rotate(1.3deg);
-}
-
-.grid-entry:nth-child(5n) {
-	transform: rotate(-0.8deg);
+	/* transforms + hover handled by GSAP in animations.js */
 }
 
 .grid-entry:hover {
-	transform: rotate(0deg) scale(1.03);
 	box-shadow: 4px 6px 0px var(--accent);
 	z-index: 10;
 }
@@ -186,7 +164,7 @@ li::marker {
 }
 
 #portfolio-list-box>nav a {
-	font-family: 'Space Mono', monospace;
+	font-family: 'Nunito', sans-serif;
 	font-size: 0.78rem;
 	color: var(--muted);
 	text-decoration: none;
@@ -201,7 +179,7 @@ li::marker {
 /* ===== detail panel placeholder ===== */
 .detail-placeholder {
 	color: var(--muted);
-	font-family: 'Space Mono', monospace;
+	font-family: 'Nunito', sans-serif;
 	font-size: 0.82rem;
 	padding: 1.5rem;
 }
