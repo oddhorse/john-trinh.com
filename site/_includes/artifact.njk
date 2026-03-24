@@ -14,16 +14,19 @@ layout: base.njk
 			visibility: hidden;
 		}
 	</style>
-	<h2>{{ title }}</h2>
-	<h3>
-		<i>{{ time }}. {{ subtitle }}</i>
-	</h3>
-	{#
-    {% if image %}
-        <img src="{{ image }}" alt="{{ title }} image" style="max-width:400px;display:block;">
-    {% endif %}
-    #}
-	{{ content | safe }}
+	<link rel="stylesheet" href="/assets/css/artifacts.css">
+	<div class="artifact-content">
+		<h1>{{ title }}</h1>
+		<h4 class="artifact-subtitle">
+			<i>{{ time }}. {{ subtitle }}</i>
+		</h4>
+		{#
+        {% if image %}
+            <img src="{{ image }}" alt="{{ title }} image" style="max-width:400px;display:block;">
+        {% endif %}
+        #}
+		{{ content | safe }}
+	</div>
 {% endblock %}
 
 {# If this artifact page is visited directly (pretty URL), boot the list view
@@ -41,32 +44,46 @@ layout: base.njk
 			s.src = src
 			s.onload = resolve
 			s.onerror = reject
-			document.head.appendChild(s)
+			document
+				.head
+				.appendChild(s)
 		})
 	}
 
 	import ('/assets/js/home.js').then(async (m) => {
 		// on narrow screens, skip body replacement — show server-rendered artifact page as-is
 		if (window.matchMedia('(max-width: 800px)').matches) {
-			document.documentElement.classList.remove('booting-list-replace')
+			document
+				.documentElement
+				.classList
+				.remove('booting-list-replace')
 			return
 		}
 		try {
 			const currentPath = location.pathname + location.search
 			// fetch the homepage (list) HTML
 			const res = await fetch('/')
-			if (!res.ok) throw new Error('fetch / failed: ' + res.status)
+			if (!res.ok) 
+				throw new Error('fetch / failed: ' + res.status)
 			const text = await res.text()
 			const parser = new DOMParser()
 			const doc = parser.parseFromString(text, 'text/html')
 			const newBody = doc.body
-			if (!newBody) throw new Error('no body in fetched homepage')
-			// Replace current body with the homepage body content
+			if (!newBody) 
+				throw new Error('no body in fetched homepage')
+				// Replace current body with the homepage body content
 			document.body.innerHTML = newBody.innerHTML
 			// done booting: reveal main content
-			document.documentElement.classList.remove('booting-list-replace')
+			document
+				.documentElement
+				.classList
+				.remove('booting-list-replace')
 			// guarantee cards are visible even if GSAP/CDN fails
-			document.querySelectorAll('.grid-entry').forEach(el => { el.style.opacity = '1' })
+			document
+				.querySelectorAll('.grid-entry')
+				.forEach(el => {
+					el.style.opacity = '1'
+				})
 			// load GSAP + animations for the fly-in and hover effects
 			// errors here are non-fatal — cards are already visible above
 			try {
@@ -81,13 +98,18 @@ layout: base.njk
 				m.init()
 				if (typeof m.openDetail === 'function') {
 					m.openDetail(currentPath, false)
-					history.replaceState({ href: currentPath }, '', currentPath)
+					history.replaceState({
+						href: currentPath
+					}, '', currentPath)
 				}
 			}
 		} catch (err) {
 			// boot failed — reveal the server-rendered artifact page as fallback
 			console.error('booting list view failed', err)
-			document.documentElement.classList.remove('booting-list-replace')
+			document
+				.documentElement
+				.classList
+				.remove('booting-list-replace')
 		}
 	})
 </script>

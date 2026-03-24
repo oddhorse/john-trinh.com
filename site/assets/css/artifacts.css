@@ -1,0 +1,13 @@
+.artifact-content h1 {
+	font-weight: 900;
+	margin-bottom: 0;
+}
+
+.artifact-content .artifact-subtitle {
+	margin-top: 0;
+	opacity: 0.75;
+}
+
+.artifact-content h2 {
+	font-weight: 700;
+}
