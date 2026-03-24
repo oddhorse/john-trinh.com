@@ -141,8 +141,8 @@ main {
 /* thumbnail — small, inline, pixelated */
 .entry-thumb {
 	width: 56px;
-	height: 56px;
-	object-fit: cover;
+	height: auto;
+	object-fit: fill;
 	flex-shrink: 0;
 	align-self: stretch;
 	border-right: 1px solid var(--border);
