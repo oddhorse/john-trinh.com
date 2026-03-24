@@ -55,40 +55,38 @@ layout: base.njk
 			const currentPath = location.pathname + location.search
 			// fetch the homepage (list) HTML
 			const res = await fetch('/')
-			if (!res.ok) 
-				return
+			if (!res.ok) throw new Error('fetch / failed: ' + res.status)
 			const text = await res.text()
 			const parser = new DOMParser()
 			const doc = parser.parseFromString(text, 'text/html')
 			const newBody = doc.body
-			if (newBody) {
-				// Replace current body with the homepage body content
-				document.body.innerHTML = newBody.innerHTML
-				// done booting: reveal main content
-				document
-					.documentElement
-					.classList
-					.remove('booting-list-replace')
-				// GSAP and animations.js don't load on artifact pages and won't re-run
-				// after innerHTML replacement — load them dynamically so cards animate in
+			if (!newBody) throw new Error('no body in fetched homepage')
+			// Replace current body with the homepage body content
+			document.body.innerHTML = newBody.innerHTML
+			// done booting: reveal main content
+			document.documentElement.classList.remove('booting-list-replace')
+			// guarantee cards are visible even if GSAP/CDN fails
+			document.querySelectorAll('.grid-entry').forEach(el => { el.style.opacity = '1' })
+			// load GSAP + animations for the fly-in and hover effects
+			// errors here are non-fatal — cards are already visible above
+			try {
 				await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js')
 				await loadScript('/assets/js/animations.js')
-				// Ensure styles/scripts already in head remain; now init the list module
-				if (m && typeof m.init === 'function') {
-					m.init()
-					// open this artifact in the detail panel without pushing a new history entry
-					if (typeof m.openDetail === 'function') {
-						m.openDetail(currentPath, false)
-						// ensure history state corresponds to the pretty URL
-						history.replaceState({
-							href: currentPath
-						}, '', currentPath)
-					}
+			} catch (animErr) {
+				console.warn('animations failed to load, cards visible without animation', animErr)
+			}
+			// init list module and open this artifact in the detail panel
+			if (m && typeof m.init === 'function') {
+				m.init()
+				if (typeof m.openDetail === 'function') {
+					m.openDetail(currentPath, false)
+					history.replaceState({ href: currentPath }, '', currentPath)
 				}
 			}
 		} catch (err) {
-			// if anything fails, fall back to normal artifact page rendering
+			// boot failed — reveal the server-rendered artifact page as fallback
 			console.error('booting list view failed', err)
+			document.documentElement.classList.remove('booting-list-replace')
 		}
 	})
 </script>
