@@ -1,3 +1,8 @@
+// true when the viewport is narrow enough that inline detail is hidden
+function isNarrow() {
+	return window.matchMedia('(max-width: 800px)').matches
+}
+
 // Fetch artifact page and inject its main content into #portfolio-detail
 async function loadDetailContent(url) {
 	const detail = document.getElementById('portfolio-detail')
@@ -98,6 +103,8 @@ export function init() {
 	document.addEventListener('click', (e) => {
 		const a = e.target.closest('a.entry-title')
 		if (!a) return
+		// on narrow screens let the native <a> navigate to the artifact page
+		if (isNarrow()) return
 		const href = a.getAttribute('href')
 		if (!href) return
 		// only handle same-origin
@@ -117,6 +124,12 @@ export function init() {
 		if (!a) return
 		const href = a.getAttribute('href')
 		if (!href) return
+		// on narrow screens, explicitly navigate — the card has no wrapping <a>
+		// so without this, tapping outside the title text would be a dead zone
+		if (isNarrow()) {
+			location.assign(href)
+			return
+		}
 		e.preventDefault()
 		openDetail(href, true)
 	})
