@@ -107,7 +107,9 @@ function scaleRecursiveEmbeds(container) {
 		const internalWidth = parseFloat(iframe.style.width) || 960
 		const internalHeight = parseFloat(iframe.style.height) || 620
 		function fit() {
-			const scale = wrapper.offsetWidth / internalWidth
+			const w = wrapper.offsetWidth
+			if (!w) return // not laid out yet — ResizeObserver will retry when size changes
+			const scale = w / internalWidth
 			iframe.style.scale = scale
 			wrapper.style.height = Math.round(internalHeight * scale) + 'px'
 		}
