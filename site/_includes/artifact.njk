@@ -78,20 +78,20 @@ layout: base.njk
 				.documentElement
 				.classList
 				.remove('booting-list-replace')
-			// guarantee cards are visible even if GSAP/CDN fails
-			document
-				.querySelectorAll('.grid-entry')
-				.forEach(el => {
-					el.style.opacity = '1'
-				})
 			// load GSAP + animations for the fly-in and hover effects
-			// errors here are non-fatal — cards are already visible above
+			// if it fails, fall back to making cards visible manually
+			let animationsLoaded = false
 			try {
 				await loadScript('/assets/js/bg-particles.js')
 				await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js')
 				await loadScript('/assets/js/animations.js')
+				animationsLoaded = true
 			} catch (animErr) {
 				console.warn('animations/particles failed to load', animErr)
+			}
+			if (!animationsLoaded) {
+				// GSAP didn't load — cards stay at opacity:0 from CSS, make them visible
+				document.querySelectorAll('.grid-entry').forEach(el => { el.style.opacity = '1' })
 			}
 			// init list module and open this artifact in the detail panel
 			if (m && typeof m.init === 'function') {
