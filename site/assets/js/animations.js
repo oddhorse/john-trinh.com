@@ -3,7 +3,7 @@
 
 const BASE_ROTATIONS = [-1.1, 0.7, -0.4, 1.3, -0.8, 0.3, -1.5, 0.9];
 
-document.addEventListener('DOMContentLoaded', () => {
+function initAnimations() {
 	const cards = document.querySelectorAll('.grid-entry');
 
 	// assign each card a base rotation and store it
@@ -106,4 +106,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				.to(card, { scale: 1.06, duration: 0.15, ease: 'power2.out' });
 		});
 	});
-});
+}
+
+// run immediately if DOM is ready, otherwise wait for it
+// (supports both normal page load and dynamic script injection after body replacement)
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', initAnimations);
+} else {
+	initAnimations();
+}

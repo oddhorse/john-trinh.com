@@ -34,6 +34,17 @@ layout: base.njk
    the list loader so the detail panel shows this artifact without a full server-side
    rewrite. This is a JS-only solution to enable pretty URLs while keeping the
    interactive list/detail UX. */
+	// load a script by appending a <script> tag — unlike innerHTML, this actually executes
+	function loadScript(src) {
+		return new Promise((resolve, reject) => {
+			const s = document.createElement('script')
+			s.src = src
+			s.onload = resolve
+			s.onerror = reject
+			document.head.appendChild(s)
+		})
+	}
+
 	import ('/assets/js/home.js').then(async (m) => {
 		// on narrow screens, skip body replacement — show server-rendered artifact page as-is
 		if (window.matchMedia('(max-width: 800px)').matches) {
@@ -58,6 +69,10 @@ layout: base.njk
 					.documentElement
 					.classList
 					.remove('booting-list-replace')
+				// GSAP and animations.js don't load on artifact pages and won't re-run
+				// after innerHTML replacement — load them dynamically so cards animate in
+				await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js')
+				await loadScript('/assets/js/animations.js')
 				// Ensure styles/scripts already in head remain; now init the list module
 				if (m && typeof m.init === 'function') {
 					m.init()
