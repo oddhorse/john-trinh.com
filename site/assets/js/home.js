@@ -25,6 +25,9 @@ async function loadDetailContent(url) {
 		}
 		// enhance any local video elements: try mp4 fallback or show download link
 		enhanceVideos(detail)
+		// scale any .recursive-embed iframes to fill their container width,
+		// since transform:scale doesn't change the layout box
+		scaleRecursiveEmbeds(detail)
 		// focus detail for accessibility
 		detail.setAttribute('tabindex', '-1')
 		detail.focus()
@@ -76,6 +79,40 @@ function enhanceVideos(container) {
 			dl.innerHTML = `Can't play this video here — <a href="${firstSrc}" download>download</a>`
 			vid.insertAdjacentElement('afterend', dl)
 		}
+	})
+}
+
+// Scale .recursive-embed iframes and handle inception-style recursion.
+// Each level reads ?depth=N from the current page URL, stamps ?depth=N+1 into
+// the iframe src, and stops rendering at MAX_DEPTH — replacing with a placeholder.
+const RECURSIVE_EMBED_MAX_DEPTH = 5
+function scaleRecursiveEmbeds(container) {
+	const currentDepth = parseInt(new URLSearchParams(location.search).get('depth') || '0')
+
+	container.querySelectorAll('.recursive-embed').forEach(wrapper => {
+		const iframe = wrapper.querySelector('iframe')
+		if (!iframe) return
+
+		// stop recursion at max depth — swap in a placeholder
+		if (currentDepth >= RECURSIVE_EMBED_MAX_DEPTH) {
+			wrapper.innerHTML = '<p class="detail-placeholder">∞</p>'
+			return
+		}
+
+		// stamp depth+1 into the iframe src so the next level inherits it
+		const url = new URL(iframe.getAttribute('src'), location.href)
+		url.searchParams.set('depth', currentDepth + 1)
+		iframe.src = url.toString()
+
+		const internalWidth = parseFloat(iframe.style.width) || 960
+		const internalHeight = parseFloat(iframe.style.height) || 620
+		function fit() {
+			const scale = wrapper.offsetWidth / internalWidth
+			iframe.style.scale = scale
+			wrapper.style.height = Math.round(internalHeight * scale) + 'px'
+		}
+		requestAnimationFrame(fit)
+		new ResizeObserver(fit).observe(wrapper)
 	})
 }
 

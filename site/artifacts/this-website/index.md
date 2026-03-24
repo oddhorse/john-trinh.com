@@ -6,12 +6,15 @@ date: 2025-12-01
 tags:
   - web dev
   - tech
-image: 
-draft: true
+image: screenshot.png
 # TODO: update cover image with a recursive neat thing once the site is visually designed
 ---
 
-self-made! more time-consuming, but a lot more control :3
+<div class="recursive-embed" style="overflow:hidden;border-radius:8px;margin-bottom:1.2rem;">
+  <iframe src="/artifacts/this-website/" title="this website (recursive!!)" style="width:960px;max-width:none;height:620px;border:none;display:block;transform-origin: 0 0;" loading="lazy"></iframe>
+</div>
+
+custom coded! more time-consuming than a site builder, but a lot more control :3
 
 ## stack
 

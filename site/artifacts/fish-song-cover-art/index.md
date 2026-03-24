@@ -7,13 +7,12 @@ tags:
   - 3d
   - visual art
 image: cover.png
-draft: true
 ---
 
-TODO: finish!
-
-[fish song cover art.](cover.png)
+![fish song cover art.](cover.png)
 
 @[youtube](SfQ-xSIDqqw)
 
-cover art for fish song
+my music duo, MANWOMAN!, needed a cover for our single. all blender all me baby enjoy the timelapse baby yuppp!!!
+
+[listen to fish song here!](https://too.fm/manwoman-fishsong)
