@@ -12,4 +12,4 @@ image: image-1.jpg
 
 ![look at this](image-1.jpg)
 
-rest in peace david dees. photoshop is a wild animal that few have tamed better than he
+flipped [david dees](https://en.wikipedia.org/wiki/David_Dees) collage artwork. photoshop is a wild animal that few have tamed better than he

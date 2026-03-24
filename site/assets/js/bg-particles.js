@@ -4,6 +4,7 @@
 const SYMBOLS = ['♪', '♫', '♬', '♩', '★', '✦', '◆', '●', '▲', '✿', '♥', '✸']
 const COLORS = ['#F03397', '#ff6ec7', '#ffb3e0', '#d4afc9', '#c9c9c9', '#E0DDD8']
 const COUNT = 150
+const EDGE_PERCENT = 5
 
 class Particle {
 	constructor(canvas, initial = false) {
@@ -71,12 +72,14 @@ class Particle {
 
 // inject canvas behind everything
 const canvas = document.createElement('canvas')
+const csize = `${100 + (EDGE_PERCENT * 2)}%`
+const cmult = EDGE_PERCENT / 100
 canvas.style.cssText = [
 	'position: fixed',
-	'top: 0',
-	'left: 0',
-	'width: 100%',
-	'height: 100%',
+	`top: calc(-1 * (100% * ${cmult}))`,
+	`left: calc(-1 * (100% * ${cmult}))`,
+	`width: ${csize}`,
+	`height: ${csize}`,
 	'z-index: -1',
 	'pointer-events: none',
 ].join('; ')
