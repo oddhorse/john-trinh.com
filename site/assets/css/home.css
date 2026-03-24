@@ -128,6 +128,7 @@ main {
 	cursor: pointer;
 	box-shadow: 2px 3px 0px rgba(240, 51, 151, 0.18);
 	overflow: hidden;
+	opacity: 0; /* GSAP owns this — animates in on load */
 	/* transforms + hover handled by GSAP in animations.js */
 }
 
