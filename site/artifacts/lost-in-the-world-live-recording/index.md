@@ -2,7 +2,7 @@
 title: '"Lost in the world" live video'
 time: dec 2023
 subtitle: performance with live digital rig
-date: 2023-12-01
+date: 2022-12-01
 tags:
   - performance
   - music
