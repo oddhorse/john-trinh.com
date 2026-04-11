@@ -6,6 +6,7 @@ date: 2021-01-01
 tags:
   - tech
   - brand
+  - web
 image: screenshot-of-homepage.png
 ---
 

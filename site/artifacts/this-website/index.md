@@ -4,7 +4,7 @@ time: dec 2025 - ongoing
 subtitle: you're looking at it!
 date: 2025-12-01
 tags:
-  - web dev
+  - web
   - tech
 image: screenshot.png
 # TODO: update cover image with a recursive neat thing once the site is visually designed
