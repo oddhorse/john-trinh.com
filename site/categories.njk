@@ -19,6 +19,10 @@ categories:
   - title: "brand"
     filter: "brand"
     permalink: "/brand/"
+
+  - title: "web"
+    filter: "web"
+    permalink: "/web/"
 ---
 
 <link rel="stylesheet" href="/assets/css/home.css">
@@ -31,6 +35,7 @@ categories:
 			<a href="/tech/">tech</a>
 			<a href="/art/">art</a>
 			<a href="/brand/">brand</a>
+			<a href="/web/">web</a>
 		</nav>
 		<ul id="portfolio-list">
 			{% for artifact in collections.artifacts | reverse %}
@@ -39,7 +44,7 @@ categories:
 					.data
 					.tags
 					.includes(category.filter) %}
-					<li class="grid-entry {% if artifact.data.tags.includes('tech') %}cat-tech{% elif artifact.data.tags.includes('art') %}cat-art{% elif artifact.data.tags.includes('brand') %}cat-brand{% endif %}">
+					<li class="grid-entry {% if artifact.data.tags.includes('tech') %}cat-tech{% elif artifact.data.tags.includes('art') %}cat-art{% elif artifact.data.tags.includes('brand') %}cat-brand{% elif artifact.data.tags.includes('web') %}cat-web{% endif %}">
 						{% if artifact.data.image %}
 							<img class="entry-thumb" src="{{ artifact.data.image }}" alt="{{ artifact.data.title }}">
 						{% endif %}

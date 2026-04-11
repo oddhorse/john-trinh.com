@@ -128,7 +128,8 @@ main {
 	cursor: pointer;
 	box-shadow: 2px 3px 0px rgba(240, 51, 151, 0.18);
 	overflow: hidden;
-	opacity: 0; /* GSAP owns this — animates in on load */
+	opacity: 0;
+	/* GSAP owns this — animates in on load */
 	/* transforms + hover handled by GSAP in animations.js */
 }
 
@@ -201,6 +202,11 @@ li::marker {
 #portfolio-list-box>nav a[href="/brand/"] {
 	color: var(--cat-brand);
 	background: rgba(232, 136, 26, 0.1);
+}
+
+#portfolio-list-box>nav a[href="/web/"] {
+	color: var(--cat-web);
+	background: rgba(32, 178, 170, 0.08);
 }
 
 #portfolio-list-box>nav a:hover {
